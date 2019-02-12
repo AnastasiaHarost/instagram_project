@@ -1,0 +1,17 @@
+commit c00bf68bfa773afe8ec3258d7c012e17ccc87eb2 (HEAD -> master)
+Author: AnastasiaHarost <garost99@.mail.ru>
+Date:   Tue Feb 12 10:44:59 2019 +0300
+
+    ïåðåçàïèñü ïîñëåäíåãî êîììèòà
+
+commit 386d33ae46260c9e5f5c7764865697c7a28a7e42
+Author: AnastasiaHarost <garost99@.mail.ru>
+Date:   Tue Feb 12 10:41:34 2019 +0300
+
+    add task1/status.txt
+
+commit 454f9c71581052c7365138ac71f390ef0a4c3833
+Author: AnastasiaHarost <garost99@.mail.ru>
+Date:   Tue Feb 12 10:33:27 2019 +0300
+
+    add .gitignore
