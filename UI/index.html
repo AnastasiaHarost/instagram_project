@@ -9,10 +9,10 @@
 </head>
 <body>
     <header>
-        <h2 id = "site-name">Photoblog</h2>
-        <form action="" method="post" class="search">
-                <input type="search" name="" placeholder="search" class="input" />
-                <input type="submit" name="" value="" class="submit" />
+        <h2 class = "site-name">Photoblog</h2>
+        <form action="javascript:alert('hi')" method="post" class="search">
+                <input type="search" name="search" placeholder="search" class="input" />
+                <button type="submit" name="" value="" class="submit"></button>
         </form>
         <div class="btn-group">
             <button>Date</button>
@@ -26,13 +26,13 @@
     </header>
 
     <main>
-            <div id = button24>
-                    <a href="#" class="button24">add post</a>
-            </div>
-        <div id = "phototape">
-            <div id = "post">
-                <div id="user_name">
-                    <b>user1</b>
+        <div class="active-btn-container">
+            <a href="#" class="add-btn">add post</a>
+        </div>
+        <div class = "phototape">
+            <div class = "post">
+                <div class="user_name">
+                    user1
                 </div>
                 <div id="image">
                     <img src = "images/1.jpg" alt = "cat" width= "100%" >
@@ -40,26 +40,28 @@
                 
                 <button type="submit" class="like"  >
                     <i class="far fa-heart fa-lg"  data-fa-transform="shrink-8 right-6"  data-fa-transform="shrink-8 down-116"></i>
-                    </button>
+                </button>
                     <time id="post-time" datetime="2017-03-02T02:44" title="2017-03-02 at 02:44 AM">
                         2017-03-02 at 02:44 AM
                     </time>
                 
                 <div class="text-container">
-                        
-                        <p><b>3 likes</b>
+                        <p>
+                            <b>3 likes</b>
                             <br><b> user1 </b>Cats have been domesticated for around 4,000 years. <span id="dots">...</span><span id="more">
                                 While they were once valued for their hunting abilities,
                                  they are now valued for their companionship and loving 
-                                 behaviour.</span> <button  id="myBtn">show more</button></p>
+                                 behaviour.</span> 
+                                 <button  id="myBtn">show more</button>
+                        </p>
                                  
-                                  <a href="/search/cats/">#cats</a><a href="/search/kitten/">#kitten</a>
-                                  <a href="/search/beauty/">#beauty</a><a href="/search/kittenlife/">#kittenlife</a>
+                        <a href="/search/cats/">#cats</a><a href="/search/kitten/">#kitten</a>
+                        <a href="/search/beauty/">#beauty</a><a href="/search/kittenlife/">#kittenlife</a>
                     </div>​
                 </div>
-            <div id = "post">
-                <div id="user_name">
-                    <b>user2</b>
+            <div class = "post">
+                <div class="user_name">
+                    user2
                 </div>
                 <div id="image">
                     <img src = "images/2.jpg" alt = "cat" width= "100%">
@@ -85,9 +87,9 @@
                     </div>​
 
             </div>
-            <div id = "post">
-                <div id="user_name">
-                    <b>user3</b>
+            <div class = "post">
+                <div class="user_name">
+                    user3
                 </div>
                 <div id="image">
                     <img src = "images/3.jpg" alt = "cat" width= "100%">
@@ -112,9 +114,9 @@
                                   <a href="/search/cats/">#cats</a><a href="/search/kitten/">#kitten</a>
                     </div>​
             </div>
-            <div id = "post">
-                <div id="user_name">
-                    <b>user3</b>
+            <div class= "post">
+                <div class="user_name">
+                   user3
                 </div>
                 <div id="image">
                     <img src = "images/4.jpg" alt = "cat" width= "100%">
@@ -139,9 +141,9 @@
                                   <a href="/search/cats/">#cats</a><a href="/search/kitten/">#kitten</a>
                     </div>​
             </div>
-            <div id = "post">
-                <div id="user_name">
-                    <b>user2</b>
+            <div class = "post">
+                <div class="user_name">
+                    user2
                 </div>
                 <div id="image">
                     <img src = "images/5.jpg" alt = "cat" width= "100%">
@@ -166,9 +168,9 @@
                                   <a href="/search/cats/">#cats</a><a href="/search/kitten/">#kitten</a>
                     </div>​
             </div>
-            <div id = "post">
-                <div id="user_name">
-                    <b>user3</b>
+            <div class = "post">
+                <div class="user_name">
+                    user3
                 </div>
                 <div id="image">
                     <img src = "images/6.jpg" alt = "cat" width= "100%">
@@ -193,9 +195,9 @@
                                   <a href="/search/cats/">#cats</a><a href="/search/kitten/">#kitten</a>
                     </div>​
             </div>
-            <div id = "post">
-                <div id="user_name">
-                    <b>user1</b>
+            <div class = "post">
+                <div class="user_name">
+                    user1
                 </div>
                 <div id="image">
                     <img src = "images/7.jpg" alt = "cat" width= "100%">
@@ -220,9 +222,9 @@
                                   <a href="/search/cats/">#cats</a><a href="/search/kitten/">#kitten</a>
                     </div>​
             </div>
-            <div id = "post">
-                <div id="user_name">
-                    <b>user1</b>
+            <div class = "post">
+                <div class="user_name">
+                    user1
                 </div>
                 <div id="image">
                     <img src = "images/8.jpg" alt = "cat" width= "100%">
@@ -247,9 +249,9 @@
                                   <a href="/search/cats/">#cats</a><a href="/search/kitten/">#kitten</a>
                     </div>​
             </div>
-            <div id = "post">
-                <div id="user_name">
-                    <b>user2</b>
+            <div class = "post">
+                <div class="user_name">
+                    user2
                 </div>
                 <div id="image">
                     <img src = "images/9.jpg" alt = "cat" width= "100%">
@@ -274,9 +276,9 @@
                                   <a href="/search/cats/">#cats</a><a href="/search/kitten/">#kitten</a>
                     </div>​
             </div>
-            <div id = "post">
-                <div id="user_name">
-                    <b>user3</b>
+            <div class = "post">
+                <div class="user_name">
+                    user3
                 </div>
                 <div id="image">
                     <img src = "images/10.jpg" alt = "cat" width= "100%">
@@ -304,25 +306,23 @@
             <div class="show-more-posts">
                     <button><b>Show more posts</b></button>
             </div>
-            
         </div>
        
     </main>
     <footer>
-        
-        <h2 id = "site-name"> Photoblog</h2>
-        <p id="footer-text">All content Anastasia Harost 2019
-        <br> FAMCS, 2 course, 7 group
-        <br> last update:
-        <time id="footer-time" datetime="2011-12-14T16:16" title="2011-12-14 at 04:16 PM">
-            04.03.2019
-        </time></p>
+        <h2 class = "site-name"> Photoblog</h2>
+        <div class="footer-text">
+            <p>All content Anastasia Harost 2019</p>
+            <p> FAMCS, 2 course, 7 group </p>
+            <p> last update:
+            <time id="footer-time" datetime="2011-12-14T16:16" title="2011-12-14 at 04:16 PM">
+                04.03.2019
+            </time></p>
+        </div>
         <p id="footer-contact">
-            <br>Contact email:
+            Contact email:
             <a href="garost99@mail.ru">garost99@mail.ru</a>
         </p> 
-        
-        
     </footer>
     
 </body>

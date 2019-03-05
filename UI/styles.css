@@ -15,11 +15,11 @@
   font-family: Raleway; 
   src: url(fonts/Raleway-Light.ttf); 
   }
-  #user_name {
+  .user_name {
     transform: scaleY(1.3) scaleX(1.3);
     margin-top: 10px;
     margin-left:100px ; 
-
+    font-weight: bold;
   }
 header{
     display: flex; 
@@ -31,103 +31,59 @@ header{
     border-radius: 7px;
     background: white;
     border: 2px solid rgba(0,0,0,0.3);
-
-    -moz-background-clip: border;     
-    -webkit-background-clip: border;  
-    background-clip: border-box;
-
-    -moz-background-clip: padding;     
-    -webkit-background-clip: padding; 
-    background-clip: padding-box;
-
-    -moz-background-clip: content;     
-    -webkit-background-clip: content;  
-    background-clip: content-box;
 }
-#site-name{
+.site-name{
   font-family: Instagram-1;
   display:inline-block;
   margin-left: 20px;
   transform: scaleX(1.3);
 }
 
-#phototape{ 
-  display: inline-block;
+.phototape{ 
+  display: inline-flexbox;
     width: 640px;
     margin-left: 20%;
-   
-    margin-top: 50px; 
     margin-bottom: 30px;
-    float: left;
-    
-    /*box-shadow: inset 0 0 5px rgba(0,0,0,0.1), inset 0 1px 2px rgba(0,0,0,0.3);*/
-
 }
-#post{
+.post{
     margin-top: 30px; 
     border-radius: 7px;
     background: white;
     border: 2px solid rgba(0,0,0,0.3);
-
-    -moz-background-clip: border;     
-    -webkit-background-clip: border;  
-    background-clip: border-box;
-
-    -moz-background-clip: padding;     
-    -webkit-background-clip: padding; 
-    background-clip: padding-box;
-
-    -moz-background-clip: content;     
-    -webkit-background-clip: content;  
-    background-clip: content-box;
 }
+    
 .like{
     display: inline-block;
     width: 40px;
-  height: 40px;
-cursor: pointer;
-border-radius: 50%;
+    height: 40px;
+    cursor: pointer;
+    border-radius: 50%;
 
-box-shadow: 0 3px 20px rgba(0,0,0,.25),
-inset 0 2px 0 rgba(255,255,255,.6),
-0 2px 0 rgba(0,0,0,.1),
-inset 0 0 20px rgba(0,0,0,.1);
+    box-shadow: 0 3px 20px rgba(0,0,0,.25),
+    inset 0 2px 0 rgba(255,255,255,.6),
+    0 2px 0 rgba(0,0,0,.1),
+    inset 0 0 20px rgba(0,0,0,.1);
 }
 
 #image{
   margin-top: 15px;
 }
-#date{
-  display:inline-block;
-  margin-left: 500px;
-    
-}
+
 footer{
   position: fixed; /* Фиксированное положение */
   left: 0; bottom: 0;
   height: 80px;
   width: 100%;
   justify-content:space-between;
+  align-items: center;
   display: flex; 
   border-radius: 7px;
-    background: white;
-    border: 2px solid rgba(0,0,0,0.3);
-
-    -moz-background-clip: border;     
-    -webkit-background-clip: border;  
-    background-clip: border-box;
-
-    -moz-background-clip: padding;     
-    -webkit-background-clip: padding; 
-    background-clip: padding-box;
-
-    -moz-background-clip: content;     
-    -webkit-background-clip: content;  
-    background-clip: content-box;
+  background: white;
+  border: 2px solid rgba(0,0,0,0.3);
 }
-#footer-text{
-  
-  display:inline-block;
+.footer-text p,
+.footer-text time{
+  margin: 0;
   color: rgb(134, 134, 134);
 }
 #footer-contact{
@@ -137,8 +93,7 @@ footer{
 }
 #myBtn{
   display: inline-block;
-  -webkit-border-radius: 14px;
-  -moz-border-radius: 14px;
+  border-radius: 14px;
   box-shadow: 0 1px 1px 1px rgba(0,0,0,.25);
   font-size: 12px;
 }
@@ -167,13 +122,13 @@ footer{
     background: #E8E8E8;
     color: #333;
   }
-
   .search .submit {
     position: absolute;
-    top: -10px;
+    border: none;
+    bottom: 25px;
     right: 1%;
-    width: 37px;
-    height: 100%;
+    width: 27px;
+    height: 50%;
     cursor: pointer;
     background: url(https://lh4.googleusercontent.com/-b-5aBxcxarY/UAfFW9lVyjI/AAAAAAAABUg/gQtEXuPuIds/s13/go.png) 50% no-repeat;
     opacity: 0.5;
@@ -187,25 +142,19 @@ footer{
   #post-time{
     margin-left: 400px;
   }
-
-  .btn-group{
-  
-  }
   .btn-group button {
-    background-color: rgb(221, 46, 207); /* Green background */
-    border: 1px solid rgb(149, 9, 177); /* Green border */
-    color: rgb(0, 0, 0); /* White text */
-    padding: 10px 24px; /* Some padding */
-    cursor: pointer; /* Pointer/hand icon */
-    float: left; /* Float the buttons side by side */
+    background-color: rgb(221, 46, 207); 
+    border: 1px solid rgb(149, 9, 177);
+    color: rgb(0, 0, 0); 
+    padding: 10px 24px; 
+    cursor: pointer;
+    
     margin-top: 15px;
 
     border-radius: 7px;
     background: white;
     border: 2px solid rgba(0,0,0,0.3);
   }
-  
-  /* Clear floats (clearfix hack) */
   .btn-group:after {
     content: "";
     clear: both;
@@ -214,10 +163,10 @@ footer{
   }
   
   .btn-group button:not(:last-child) {
-    border-right: none; /* Prevent double borders */
+    border-right: none;
+    margin: 0;
   }
   
-  /* Add a background color on hover */
   .btn-group button:hover {
     background: linear-gradient(rgb(58, 68, 207), rgb(34, 157, 214)) rgb(0, 83, 207);
   }
@@ -231,28 +180,29 @@ footer{
     border-radius: 7px;
     background: white;
     border: 2px solid rgba(0,0,0,0.3);
-    float: right;
     margin-right: 20px;
-    /*background-color: rgb(135, 117, 201);*//* Green background */
-    color: rgb(0, 0, 0); /* White text */
-    padding: 10px 24px; /* Some padding */
-    cursor: pointer; /* Pointer/hand icon */
-    float: left; /* Float the buttons side by side */
+    
+    color: rgb(0, 0, 0); 
+    padding: 10px 24px; 
+    cursor: pointer; 
+  
     margin-top: 15px;
   }
-  /* Add a background color on hover */
+  
   .sub button:hover {
     background: linear-gradient(rgb(58, 68, 207), rgb(34, 157, 214)) rgb(0, 83, 207);
   }
-  #button24{
+  .active-btn-container{
     margin-top: 50px; 
-    display: inline-block;
-    float: left;
+    display: flexbox;
+    
+    
   }
   
-  a.button24 {
+  a.add-btn {
+    
 
-    display: table;
+    display: inline-block;
     margin-top: 30px;
     margin-left: 1px;
     color: white;
@@ -265,7 +215,7 @@ footer{
     background: linear-gradient(rgb(0, 0, 0), rgb(161, 159, 159)) rgb(255, 255, 255);
     transition: 0.2s;
   } 
-  a.button24:hover {
+  a.add-btn:hover {
      background: linear-gradient(rgb(58, 68, 207), rgb(34, 157, 214)) rgb(0, 83, 207);
   }
   
@@ -280,36 +230,29 @@ footer{
   }
   .show-more-posts button{
     display: inline-block;
-
-
--webkit-border-radius: 14px;
--moz-border-radius: 14px;
-
-box-shadow: 0 1px 1px 1px rgba(0,0,0,.25);/*,
-inset 0 2px 0 rgba(255,255,255,.6),
-0 2px 0 rgba(0,0,0,.1),
-inset 0 0 20px rgba(0,0,0,.1);*/
-font-size: 16px;
+    border-radius: 14px;
+    box-shadow: 0 1px 1px 1px rgba(0,0,0,.25);
+    font-size: 16px;
     margin-top: 15px;
     margin-left: 37%;
   }
-  /* Add a background color on hover */
+
   .show-more-posts button:hover {
     background: linear-gradient(rgb(58, 68, 207), rgb(34, 157, 214)) rgb(0, 83, 207);
   }
-  @media screen and (max-width: 1500px){
+ /* @media screen and (max-width: 1500px){
     #phototape{
       margin-left:10%; 
     }
   }
     @media screen and (max-width: 1150px){
       #phototape{
-        margin-left:3%; 
+        margin-left:0px; 
       }
     }
       @media screen and (max-width: 885px){
         #phototape{
-          margin-top: 10px;
+          margin-top: 0px;
           margin-left:15%; 
         }
         header{
@@ -332,13 +275,14 @@ font-size: 16px;
             margin-left:19%; 
           }
         }
-        @media screen and (max-width: 500px){
+        @media screen and (max-width: 600px){
           #phototape{
             margin-left:30%; 
+            margin-top: 20px;
           }
         
           #button24
           {
             margin-left:30%; 
           }
-        }
+        }*/
