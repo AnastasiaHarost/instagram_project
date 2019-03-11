@@ -51,11 +51,29 @@ var filterAuthorDate = {
     authorName: "AnaLiakh",
     hashtags: [],
 };
-var filterHash = {
+var filterHashtags = {
     dateFrom: new Date(-8640000000000000),
     dateTo: new Date(8640000000000000),
     authorName: "",
-    hashtags: ["world","cat"],
+    hashtags: ["kitten","cat","animals"],
+};
+var filterHashtagsAusthor = {
+    dateFrom: new Date(-8640000000000000),
+    dateTo: new Date(8640000000000000),
+    authorName: "janny_9991",
+    hashtags: ["kitten","cat","animals"],
+};
+var filterHashtagsDate = {
+    dateFrom: new Date("2011-10-23T10:00:00"),
+    dateTo: new Date("2018-02-23T23:00:00"),
+    authorName: "",
+    hashtags: ["kitten","cat","animals","hello"],
+};
+var filterHashtagsDateAuthor = {
+    dateFrom: new Date("2011-10-23T10:00:00"),
+    dateTo: new Date("2018-02-23T23:00:00"),
+    authorName: "janny_9991",
+    hashtags: ["kitten","cat","animals"],
 };
 function test() {
     console.log("Add and validation----------------");
@@ -87,10 +105,14 @@ function test() {
     console.log(posts.getPhotoPosts(7,10,filterData));
     console.log(posts.getPhotoPosts(0,4,filterAuthor));
     console.log(posts.getPhotoPosts(0,4,filterAuthorDate));
-    //console.log(posts.getPhotoPosts(0,10,filterHash));
-
-
-    //console.log(posts.getPhotoPosts(0,10,{author: "janny_9991"}));
+    console.log("-----------");
+    console.log(posts.getPhotoPosts(0,20,filterHashtags));
+    console.log(posts.getPhotoPosts(0,20,filterHashtagsAusthor));
+    console.log(posts.getPhotoPosts(0,20,filterHashtagsDate));
+    console.log(posts.getPhotoPosts(0,20,filterHashtagsDateAuthor));
+    console.log("-----------");
+    console.log(posts.getPhotoPosts(0,10,{author: "janny_9991"}));
+    console.log(posts.getPhotoPosts(0,10,{hashtags: ["kitten","cat","animals"]}));
 
     
     

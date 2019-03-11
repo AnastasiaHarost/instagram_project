@@ -8,7 +8,7 @@ var posts = (function(){
           author: 'janny_9991',
           photoLink: 'images/1',
           likes: ["janny_9991"],
-          hashtags: ["cat","kitten","animals"]
+          hashtags: ["cat","kitten","animals","hello"]
          },
          {
             id: "2",
@@ -161,7 +161,7 @@ var posts = (function(){
             author: "vasilisa3",
             photoLink: 'images/18',
             likes: ["janny_9991","AnaLiakh", "stupen45"],
-            hashtags: ["cat","kitten","animals"]
+            hashtags: ["cat","kitten","animals","day"]
         },
         {
             id: "19",
@@ -185,7 +185,7 @@ var posts = (function(){
       var defaultFilter = {
         dateFrom: new Date(-8640000000000000),
         dateTo: new Date(8640000000000000),
-        authorName: "",
+        author: "",
         hashtags: [],
     };
     module.addPhotoPost = function (post) {
@@ -219,7 +219,7 @@ var posts = (function(){
     }
     module.validatePhotoPost=function(post){
         if (typeof(post.id)!=='string'||typeof(post.description)!=='string'
-        ||typeof(post.author)!='string'||typeof(post.photoLink)!='string'
+        ||typeof(post.author)!='string'||typeof(post.photoLink)!=='string'
         ||!(post.createdAt instanceof Date)||post.description.length >= 200
         ||!post.createdAt||!post.author||!post.id||!post.description||!post.photoLink){
             return false;
@@ -253,12 +253,17 @@ var posts = (function(){
         }
     };
     function commonHashtags(posthashtags, confighashtags) {
+        var count=0;
         for (var i = 0; i < posthashtags.length; i++) {
             for (var j = 0; j < confighashtags.length; j++) {
-                if (posthashtags[i] == confighashtags[j]) {
-                    return true;
+                if ( confighashtags[j] == posthashtags[i]) {
+                    count++;
+                    
                 }
             }
+        }
+        if (count!=0&&count==confighashtags.length){
+            return true;
         }
         return false;
     }
@@ -267,11 +272,25 @@ var posts = (function(){
             console.log('Incorrect getPhotoPosts params');
             return false;
           }
+        if(filterConfig !== defaultFilter){
+            if(!filterConfig.author){
+                filterConfig.author = defaultFilter.author;
+            }
+            if(!filterConfig.dateFrom){
+                filterConfig.dateFrom = defaultFilter.dateFrom;
+            }
+            if(!filterConfig.dateTo){
+                filterConfig.dateTo = defaultFilter.dateTo;
+            }
+            if(!filterConfig.hashtags){
+                filterConfig.hashtags = defaultFilter.hashtags;
+            }
+        }
         var filtered_mas=photoPosts.filter(a =>
             (a.createdAt >= filterConfig.dateFrom||!filterConfig.dateFrom) &&
             (a.createdAt <= filterConfig.dateTo||!filterConfig.dateTo) &&
-            (a.author == filterConfig.authorName || filterConfig.authorName == "")&&
-            (commonHashtags(a.hashtags, filterConfig.hashtags) || filterConfig.hashtags.length == 0)
+            (a.author == filterConfig.author || filterConfig.author === "")&&
+            (commonHashtags(a.hashtags, filterConfig.hashtags) || filterConfig.hashtags.length === 0)
             ).sort(function (a, b) {
             return b.createdAt- a.createdAt;
         }).slice(skip,skip+top);
