@@ -36,43 +36,43 @@ var editBad={
 var filterData = {
     dateFrom: new Date("2004-10-23T10:00:00"),
     dateTo: new Date("2018-02-23T23:00:00"),
-    authorName: "",
+    author: "",
     hashtags: [],
 };
 var filterAuthor = {
     dateFrom: new Date(-8640000000000000),
     dateTo: new Date(8640000000000000),
-    authorName: "janny_9991",
+    author: "janny_9991",
     hashtags: [],
 };
 var filterAuthorDate = {
     dateFrom: new Date("2011-10-23T10:00:00"),
     dateTo: new Date("2018-02-23T23:00:00"),
-    authorName: "AnaLiakh",
+    author: "AnaLiakh",
     hashtags: [],
 };
 var filterHashtags = {
     dateFrom: new Date(-8640000000000000),
     dateTo: new Date(8640000000000000),
-    authorName: "",
-    hashtags: ["kitten","cat","animals"],
+    author: "",
+    hashtags: ["world","cat"],
 };
 var filterHashtagsAusthor = {
     dateFrom: new Date(-8640000000000000),
     dateTo: new Date(8640000000000000),
-    authorName: "janny_9991",
+    author: "janny_9991",
     hashtags: ["kitten","cat","animals"],
 };
 var filterHashtagsDate = {
     dateFrom: new Date("2011-10-23T10:00:00"),
     dateTo: new Date("2018-02-23T23:00:00"),
-    authorName: "",
+    author: "",
     hashtags: ["kitten","cat","animals","hello"],
 };
 var filterHashtagsDateAuthor = {
     dateFrom: new Date("2011-10-23T10:00:00"),
     dateTo: new Date("2018-02-23T23:00:00"),
-    authorName: "janny_9991",
+    author: "janny_9991",
     hashtags: ["kitten","cat","animals"],
 };
 function test() {
@@ -113,8 +113,5 @@ function test() {
     console.log("-----------");
     console.log(posts.getPhotoPosts(0,10,{author: "janny_9991"}));
     console.log(posts.getPhotoPosts(0,10,{hashtags: ["kitten","cat","animals"]}));
-
-    
-    
 }
 test();
