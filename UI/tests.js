@@ -114,4 +114,4 @@ function test() {
     console.log(posts.getPhotoPosts(0,10,{author: "janny_9991"}));
     console.log(posts.getPhotoPosts(0,10,{hashtags: ["kitten","cat","animals"]}));
 }
-test();
+//test();
