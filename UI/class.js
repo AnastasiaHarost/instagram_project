@@ -1,38 +1,40 @@
+// 'use strict';
+
 class PhotoPost {
-  constructor(id, description, createdat, author, photoLink, likes = [], hashtags = []) {
-    this._id = id;
-    this._description = description;
-    this._createdat = new Date(createdat);
-    this._author = author;
-    this._photoLink = photoLink;
-    this._likes = likes;
-    this._hashtags = hashtags;
+  constructor(id, description, created, author, photoLink, likes = [], hashtags = []) {
+    this.id = id;
+    this.description = description;
+    this.create = new Date(created);
+    this.author = author;
+    this.photoLink = photoLink;
+    this.likes = likes;
+    this.hashtags = hashtags;
   }
 
   _validate() {
-    return !(typeof (this._id) !== 'string' || typeof (this._description) !== 'string'
-            || typeof (this._author) !== 'string' || typeof (this._photoLink) !== 'string'
-            || !(this._createdat instanceof Date) || this._description.length >= 200
-            || !this._createdat || !this._author
-            || !this._id || !this._description || !this._photoLink);
+    return !(typeof (this.id) !== 'string' || typeof (this.description) !== 'string'
+            || typeof (this.author) !== 'string' || typeof (this.photoLink) !== 'string'
+            || !(this.create instanceof Date) || this.description.length >= 200
+            || !this.create || !this.author
+            || !this.id || !this.description || !this.photoLink);
   }
 }
-_defaultFilter = {
+
+const DEFAULT_FILTER = {
   dateFrom: new Date(-8640000000000000),
   dateTo: new Date(8640000000000000),
   author: '',
-  hashtags: [],
+  hashtagstags: [],
 };
 class PhotoPosts {
   constructor() {
-    this._mas = [];
+    this._posts = [];
   }
 
   add(post) {
-    const expost = this.get(post._id);
+    const expost = this.get(post.id);
     if (!expost && post._validate()) {
-      this._mas.push(post);
-      this._mas.sort((a, b) => new Date(b._createdat.getTime()) - new Date(a._createdat.getTime()));
+      this._posts.push(post);
       return true;
     }
 
@@ -40,14 +42,14 @@ class PhotoPosts {
   }
 
   get(id) {
-    const post = this._mas.find(el => el._id === id);
+    const post = this._posts.find(el => el.id === id);
     return post || false;
   }
 
   remove(id) {
-    const index = this._mas.findIndex(el => el._id === id);
+    const index = this._posts.findIndex(el => el.id === id);
     if (index !== -1) {
-      this._mas.splice(index, 1);
+      this._posts.splice(index, 1);
       return true;
     }
 
@@ -60,9 +62,9 @@ class PhotoPosts {
       const isvalidate = expost._validate();
       if (isvalidate) {
         Object.keys(edits)
-          .filter(i => i !== 'id' && i !== 'author' && i !== 'createdat' && i !== 'likes')
+          .filter(key => key !== 'id' && key !== 'author' && key !== 'create' && key !== 'likes')
           .forEach(
-            (i) => { expost[i] = edits[i]; },
+            (key) => { expost[key] = edits[key]; },
           );
         return true;
       }
@@ -71,42 +73,47 @@ class PhotoPosts {
     return false;
   }
 
-  _commonHashtags(posthashtags, confighashtags) {
-    return confighashtags.every(
-      postTag => posthashtags.indexOf(postTag) !== -1,
+  _isIntersect(posthashtagstags, confighashtagstags) {
+    return confighashtagstags.every(
+      postTag => posthashtagstags.indexOf(postTag) !== -1,
     );
   }
 
-  getPage(skip = 0, top = 10, filterConfig = _defaultFilter) {
+  getPage(skip = 0, top = 10, filterConfig = DEFAULT_FILTER) {
     if (typeof skip !== 'number' || typeof top !== 'number' || typeof filterConfig !== 'object') {
-      console.log('Incorrect getPage params');
-      return false;
+      throw new Error('Incorrect filter params!');
     }
-    filterConfig = Object.assign({}, _defaultFilter, filterConfig || {});
-    const filterPredicate = a => (a._createdat.getTime() >= filterConfig.dateFrom.getTime()
-    || !filterConfig.dateFrom.getTime())
-    && (a._createdat.getTime() <= filterConfig.dateTo.getTime()
-    || !filterConfig.dateTo.getTime())
-    && (a._author === filterConfig.author || filterConfig.author === '')
-    && (this._commonHashtags(a._hashtags, filterConfig.hashtags)
-    || filterConfig.hashtags.length === 0);
-
-    return this._mas.filter(filterPredicate)
-      .sort((a, b) => b.createdat - a.createdat).slice(skip, skip + top);
+    filterConfig = Object.assign({}, DEFAULT_FILTER, filterConfig || {});
+    const filterPredicate = (a) => {
+      if (filterConfig.dateFrom.getTime() && a.create.getTime() < filterConfig.dateFrom.getTime()) {
+        return false;
+      }
+      if (filterConfig.dateTo.getTime() && a.create.getTime() > filterConfig.dateTo.getTime()) {
+        return false;
+      }
+      if (filterConfig.author && a.author !== filterConfig.author) return false;
+      if (filterConfig.hashtags && !this._isIntersect(a.hashtags, filterConfig.hashtags)) {
+        return false;
+      }
+      return true;
+    };
+    return this._posts.filter(filterPredicate)
+      .sort((a, b) => b.create - a.create).slice(skip, skip + top);
   }
 
   addAll(posts) {
     const notValid = [];
-    for (let i = 0; i < posts.length; i += 1) {
-      const post = new PhotoPost(posts[i].id, posts[i].description, posts[i].createdat,
-        posts[i].author, posts[i].photoLink, posts[i].likes, posts[i].hashtags);
-      if (!this.add(post)) { notValid.push(post); }
-    }
+    posts.forEach((originalPost) => {
+      const post = Object.assign(new PhotoPost(), originalPost);
+      if (!this.add(post)) {
+        notValid.push(post);
+      }
+    });
     return notValid;
   }
 
   clear() {
-    this._mas.splice(0, this._mas.length);
+    this._posts.splice(0, this._posts.length);
     return true;
   }
 }
@@ -142,7 +149,7 @@ const posts = [
     author: 23,
     photoLink: 'images/1',
     likes: ['janny_9991'],
-    hashtags: ['cat', 'kitten', 'animals', 'hello'],
+    hashtagstags: ['cat', 'kitten', 'animals', 'hello'],
   },
   {
     id: '56',
@@ -151,7 +158,7 @@ const posts = [
     author: 'alex1',
     photoLink: 'images/2',
     likes: ['janny_9991', 'stupen45'],
-    hashtags: ['cat', 'kitten', 'animals'],
+    hashtagstags: ['cat', 'kitten', 'animals'],
   },
   {
     id: '57',
@@ -160,12 +167,12 @@ const posts = [
     author: 'spupen45',
     photoLink: 'images/3',
     likes: ['janny_9991', 'stupen45'],
-    hashtags: ['cat', 'kitten', 'animals'],
+    hashtagstags: ['cat', 'kitten', 'animals'],
   },
 ];
 
 
-console.log('get post with id=2 ');
+/* console.log('get post with id=2 ');
 console.log(photoPosts.get('2'));
 console.log('remove post with id=2 ');
 console.log(photoPosts.remove('2'));
@@ -181,10 +188,10 @@ console.log(photoPosts.get('3'));
 console.log('try to edit id=3 post:');
 console.log(photoPosts.edit('3', {
   description: 'new description',
-  hashtags: ['planet'],
+  hashtagstags: ['planet'],
 }));
 console.log('id=3 post after editing:');
-console.log(photoPosts.get('3'));
+console.log(photoPosts.get('3')); */
 console.log('get 10 posts, skip 0, sorted by date');
 console.log(photoPosts.getPage());
 console.log('get 14 posts, skip 5, sorted by date');
@@ -196,13 +203,13 @@ console.log(photoPosts.getPage(0, 10, {
   dateFrom: new Date('2011-10-23T10:00:00'),
   dateTo: new Date('2018-02-23T23:00:00'),
 }));
-console.log('posts after filtering by hashtag "world"');
-console.log(photoPosts.getPage(0, 10, { hashtags: ['world'] }));
-console.log('posts after filtering by hashtags "world" and "cat"');
-console.log(photoPosts.getPage(0, 10, { hashtags: ['world', 'cat'] }));
-console.log('posts after filtering by hashtags,author and date ( 2015-2001)');
+console.log('posts after filtering by hashtagstag "world"');
+console.log(photoPosts.getPage(0, 10, { hashtagstags: ['world'] }));
+console.log('posts after filtering by hashtagstags "world" and "cat"');
+console.log(photoPosts.getPage(0, 10, { hashtagstags: ['world', 'cat'] }));
+console.log('posts after filtering by hashtagstags,author and date ( 2015-2001)');
 console.log(photoPosts.getPage(0, 10, {
-  hashtags: ['cat', 'kitten'],
+  hashtagstags: ['cat', 'kitten'],
   author: 'AnaLiakh',
   dateFrom: new Date('2001-10-23T10:00:00'),
   dateTo: new Date('2015-02-23T23:00:00'),
