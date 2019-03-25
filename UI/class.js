@@ -118,9 +118,8 @@ class PhotoPosts {
   }
 }
 
-const photoPosts = new PhotoPosts();
 
-photoPosts.add(new PhotoPost('1', 'Beautiful cat', '2017-02-23T23:00:00', 'janny_9991', 'images/1', ['janny_9991'], ['cat', 'kitten', 'animals', 'hello']));
+/* photoPosts.add(new PhotoPost('1', 'Beautiful cat', '2017-02-23T23:00:00', 'janny_9991', 'images/1', ['janny_9991'], ['cat', 'kitten', 'animals', 'hello']));
 photoPosts.add(new PhotoPost('2', 'Funny animals', '2016-02-23T23:00:00', 'alex1', 'images/2', ['janny_9991', 'stupen45'], ['cat', 'kitten', 'animals']));
 photoPosts.add(new PhotoPost('3', 'nothing to add', '2019-02-23T23:00:00', 'spupen45', 'images/3', ['janny_9991', 'stupen45'], ['cat', 'kitten', 'animals']));
 photoPosts.add(new PhotoPost('4', 'Cats have 30 teeth', '2004-02-23T23:00:00', 'AnaLiakh', 'images/4', ['janny_9991', 'stupen45'], ['cat']));
@@ -191,7 +190,7 @@ console.log(photoPosts.edit('3', {
   hashtagstags: ['planet'],
 }));
 console.log('id=3 post after editing:');
-console.log(photoPosts.get('3')); */
+console.log(photoPosts.get('3'));
 console.log('get 10 posts, skip 0, sorted by date');
 console.log(photoPosts.getPage());
 console.log('get 14 posts, skip 5, sorted by date');
@@ -220,4 +219,4 @@ console.log('new elements added');
 console.log(photoPosts);
 console.log('clear photoPosts');
 photoPosts.clear();
-console.log(photoPosts);
+console.log(photoPosts); */
