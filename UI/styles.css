@@ -48,7 +48,7 @@ header{
 
 .phototape{ 
     width: 640px;
-    margin-top: 50px;
+    margin-top: 20px;
     margin-left: 30%;
     margin-bottom: 50px;
     display: inline-block;
@@ -73,7 +73,7 @@ header{
     inset 0 0 20px rgba(0,0,0,.1);
 }
 .edit{
-  display: inline-block;
+  
   width: 40px;
   height: 40px;
   cursor: pointer;
@@ -85,7 +85,7 @@ header{
   inset 0 0 20px rgba(0,0,0,.1);
 }
 .delete{
-  display: inline-block;
+  
   width: 40px;
   height: 40px;
   cursor: pointer;
@@ -208,6 +208,7 @@ footer{
     font-weight:bold;
   }
   .user{
+    display: none;
     margin-right: 5%;
     margin-top: 30px;
     font-weight:bold;
@@ -215,6 +216,7 @@ footer{
   }
   
   .log-out button{
+    display: none;
     border-radius: 7px;
     background: white;
     border: 2px solid rgba(0,0,0,0.3);
@@ -247,11 +249,12 @@ footer{
     background: linear-gradient(rgb(58, 68, 207), rgb(34, 157, 214)) rgb(0, 83, 207);
   }
   .btn-container{
+    
     margin-top: 50px; 
     margin-right: 0;
   }
   a.add-btn {
-    display: inline-block;
+    display: none;
     margin-top: 30px;
     margin-left: 1px;
     color: white;
