@@ -19,7 +19,7 @@
                     <button>User_name</button>
                     <button>Hashtags</button>
                   </div>  
-                <div class="user">janny_9991</div>
+                <div class="user"></div>
                 <div class = "log-out">
                     <button>Log out</button>
                 </div>
@@ -32,7 +32,35 @@
             <a href="#" class="add-btn">add post</a>
         </div>
         <div class = "phototape">
-        
+            <template id="post-template">
+                <div class = "post">
+                    <div class="user_name" data-target = "author">
+                    </div>
+                    <div class="image">
+                        <img data-target="photoLink" alt = "cat" width= "100%" >
+                    </div>
+                    <button type="submit" class="like" >
+                    <i class="far fa-heart fa-lg"  data-fa-transform="shrink-8 right-6"  data-fa-transform="shrink-8 down-116"></i>
+                    </button>
+                    <button type="submit" class="edit">
+                    <i class="far fa-edit"  data-fa-transform="shrink-8 right-6"  data-fa-transform="shrink-8 down-116"></i>
+                    </button>
+                    <button type="submit" class="delete"  >
+                    <i class="fas fa-trash-alt"  data-fa-transform="shrink-8 right-6"  data-fa-transform="shrink-8 down-116"></i>
+                    </button>
+                    <time class="post-time" data-target="create">
+                    </time>
+                    <div class="text-container">
+                        <span><b data-target="likes"></b>
+                        <br><b data-target="author"></b>
+                        <div class="description" data-target="description"></div>
+                        <button  class="myBtn">show more</button>
+                        </span>
+                        <ul class="hashtags">
+                        </ul>
+                    </div>
+                </div>
+            </template>
         </div>
         <div class="show-more-posts">
             <button><b>Show more posts</b></button>
@@ -53,7 +81,9 @@
             <a href="garost99@mail.ru">garost99@mail.ru</a>
         </p> 
     </footer> 
+    <script src="user.js"></script>
     <script src="class.js"></script>
+    <script src="MVC.js"></script>
     <script src="DOM.js"></script>
 </body>
 </html>
