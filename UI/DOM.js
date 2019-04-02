@@ -1,22 +1,21 @@
-const phototape = document.querySelector('.phototape');
-
 class View {
-  constructor(model) {
+  constructor(el, model) {
     this.model = model;
+    this.phototape = el;
   }
 
-  static createPostHtml(post) {
+  createPostHtml(post) {
     const template = document.getElementById('post-template');
     const fragment = document.importNode(template.content, true);
     const newPost = fragment.firstElementChild;
-    const likesCount = post.likes.length;
+    const likes = post.likes.length;
     const placeholders = newPost.querySelectorAll('[data-target]');
     [].forEach.call(placeholders || [], (phElement) => {
       const key = phElement.getAttribute('data-target');
       if (key === 'photoLink') {
         phElement.src = post[key];
       } else if (key === 'likes') {
-        phElement.textContent = `${likesCount} likes `;
+        phElement.textContent = `${likes} likes `;
       } else { phElement.textContent = post[key]; }
     });
     const tagsBlock = newPost.querySelector('.hashtags');
@@ -24,13 +23,15 @@ class View {
     tagsBlock.innerHTML = post.hashtags.map(
       tag => `<li class="tag"><a href="" >#${tag}</a></li>`
     ).join('');
+
+
     return newPost;
   }
 
   addPost(post) {
     if (this.model.add(post)) {
       const newPost = View.createPostHtml(post);
-      phototape.insertAdjacentElement('afterbegin', newPost);
+      this.phototape.insertAdjacentElement('afterbegin', newPost);
       return true;
     }
     return false;
@@ -52,55 +53,56 @@ class View {
       const newPost = document.querySelector(`[data-id="${id}"]`);
       if (newPost) {
         newPost.parentNode
-          .replaceChild(View.createPostHtml(this.model.get(id)), newPost);
+          .replaceChild(this.createPostHtml(this.model.get(id)), newPost);
       }
       return true;
     }
     return false;
   }
 
-  showPosts(count) {
-    this.model.getPage(count, 2).reverse().forEach((post) => {
-      const newPost = View.createPostHtml(post);
-      phototape.insertAdjacentElement('beforeend', newPost);
+  showPosts(skip = 0, top = 10, filterCongig = DEFAULT_FILTER) {
+    this.model.getPage(skip, top, filterCongig).forEach((post) => {
+      const newPost = this.createPostHtml(post);
+      this.phototape.insertAdjacentElement('beforeend', newPost);
     });
   }
 
 
-  showElementsAutorized(user) {
+  setAutorized(user) {
     if (user instanceof User) {
       document.querySelector('.user').textContent = user._name;
-      document.querySelector('.log-in').style.display = 'none';
-      document.querySelector('.user').style.display = 'inline-block';
-      document.querySelector('.log-out button').style.display = 'inline-block';
-      document.querySelector('a.add-btn').style.display = 'inline-block';
+      document.body.classList.toggle('is-auth', true);
+    } else {
+      document.querySelector('.user').textContent = '';
+      document.body.classList.toggle('is-auth', false);
     }
   }
 }
 
 const photoPosts = new PhotoPosts();
-photoPosts.add(new PhotoPost('1', 'Beautiful cat', '2017-02-23T23:00:00', 'janny_9991', 'images/1.jpg', ['janny_9991'], ['cat', 'kitten', 'animals', 'hello']));
-photoPosts.add(new PhotoPost('2', 'Funny animals', '2016-02-23T23:00:00', 'alex1', 'images/2.jpg', ['janny_9991', 'stupen45'], ['cat', 'kitten', 'animals']));
-photoPosts.add(new PhotoPost('3', 'nothing to add', '2019-02-23T23:00:00', 'spupen45', 'images/3.jpg', ['janny_9991', 'stupen45'], ['cat', 'kitten', 'animals']));
-photoPosts.add(new PhotoPost('4', 'Cats have 30 teeth', '2004-02-23T23:00:00', 'AnaLiakh', 'images/4.jpg', ['janny_9991', 'stupen45'], ['cat']));
-photoPosts.add(new PhotoPost('5', 'Cats have 30 teeth', '2013-02-23T23:00:00', 'janny_9991', 'images/5.jpg', ['janny_9991', 'stupen45'], ['cat', 'kitten', 'animals']));
-photoPosts.add(new PhotoPost('6', 'Cats have 30 teeth', '2015-02-23T23:00:00', 'AnaLiakh', 'images/6.jpg', ['janny_9991', 'stupen45'], ['cat', 'kitten', 'animals']));
-photoPosts.add(new PhotoPost('7', 'Cats have 30 teeth', '2014-02-23T23:00:00', 'AnaLiakh', 'images/7.jpg', ['janny_9991', 'stupen45'], ['cat', 'kitten', 'animals']));
-photoPosts.add(new PhotoPost('8', 'Cats have 30 teeth', '2017-02-23T23:00:00', 'spupen45', 'images/8.jpg', ['janny_9991', 'stupen45'], ['cat', 'kitten', 'animals']));
-photoPosts.add(new PhotoPost('9', 'Cats have 30 teeth', '2018-02-23T23:00:00', 'AnaLiakh', 'images/9.jpg', ['janny_9991', 'stupen45'], ['cat', 'kitten', 'animals']));
-photoPosts.add(new PhotoPost('10', 'Cats have 30 teeth', '2018-02-23T23:00:00', 'AnaLiakh', 'images/9.jpg', ['janny_9991', 'stupen45'], ['cat', 'kitten', 'animals']));
-photoPosts.add(new PhotoPost('11', '11Cats have 30 teeth', '2000-02-23T23:00:00', 'AnaLiakh', 'images/9.jpg', ['janny_9991', 'stupen45'], ['cat', 'kitten', 'animals']));
-photoPosts.add(new PhotoPost('12', '12Funny animals', '2016-02-23T23:00:00', 'alex1', 'images/2.jpg', ['janny_9991', 'stupen45'], ['cat', 'kitten', 'animals']));
-photoPosts.add(new PhotoPost('13', '13nothing to add', '2019-02-23T23:00:00', 'spupen45', 'images/3.jpg', ['janny_9991', 'stupen45'], ['cat', 'kitten', 'animals']));
-photoPosts.add(new PhotoPost('14', '14Cats have 30 teeth', '2004-02-23T23:00:00', 'AnaLiakh', 'images/4.jpg', ['janny_9991', 'stupen45'], ['cat']));
-photoPosts.add(new PhotoPost('15', '15 Cats have 30 teeth', '2013-02-23T23:00:00', 'janny_9991', 'images/5.jpg', ['janny_9991', 'stupen45'], ['cat', 'kitten', 'animals']));
-photoPosts.add(new PhotoPost('16', '16 Cats have 30 teeth', '2015-02-23T23:00:00', 'AnaLiakh', 'images/6.jpg', ['janny_9991', 'stupen45'], ['cat', 'kitten', 'animals']));
-photoPosts.add(new PhotoPost('17', '17Cats have 30 teeth', '2014-02-23T23:00:00', 'AnaLiakh', 'images/7.jpg', ['janny_9991', 'stupen45'], ['cat', 'kitten', 'animals']));
-photoPosts.add(new PhotoPost('18', '18Cats have 30 teeth', '2017-02-23T23:00:00', 'spupen45', 'images/8.jpg', ['janny_9991', 'stupen45'], ['cat', 'kitten', 'animals']));
-photoPosts.add(new PhotoPost('19', '19Cats have 30 teeth', '2018-02-23T23:00:00', 'AnaLiakh', 'images/9.jpg', ['janny_9991', 'stupen45'], ['cat', 'kitten', 'animals']));
-photoPosts.add(new PhotoPost('20', '20Cats have 30 teeth', '2018-02-23T23:00:00', 'AnaLiakh', 'images/9.jpg', ['janny_9991', 'stupen45'], ['cat', 'kitten', 'animals']));
-const view = new View(photoPosts);
-view.showElementsAutorized(new User('Liakh'));
+photoPosts.add(new PhotoPost('1', '1Beautiful cat', '2019-02-23T23:00:00', 'janny_9991', 'images/1.jpg', ['janny_9991'], ['cat', 'kitten', 'animals', 'hello']));
+photoPosts.add(new PhotoPost('2', '2Funny animals', '2018-02-23T23:00:00', 'alex1', 'images/2.jpg', ['janny_9991', 'stupen45'], ['cat', 'kitten', 'animals']));
+photoPosts.add(new PhotoPost('3', '3nothing to add', '2017-02-23T23:00:00', 'spupen45', 'images/3.jpg', ['janny_9991', 'stupen45'], ['cat', 'kitten', 'animals']));
+photoPosts.add(new PhotoPost('4', '4Cats have 30 teeth', '2016-02-23T23:00:00', 'AnaLiakh', 'images/4.jpg', ['janny_9991', 'stupen45'], ['cat']));
+photoPosts.add(new PhotoPost('5', '5Cats have 30 teeth', '2015-02-23T23:00:00', 'janny_9991', 'images/5.jpg', ['janny_9991', 'stupen45'], ['cat', 'kitten', 'animals']));
+photoPosts.add(new PhotoPost('6', '6Cats have 30 teeth', '2014-02-23T23:00:00', 'AnaLiakh', 'images/6.jpg', ['janny_9991', 'stupen45'], ['cat', 'kitten', 'animals']));
+photoPosts.add(new PhotoPost('7', '7Cats have 30 teeth', '2013-02-23T23:00:00', 'AnaLiakh', 'images/7.jpg', ['janny_9991', 'stupen45'], ['cat', 'kitten', 'animals']));
+photoPosts.add(new PhotoPost('8', '8Cats have 30 teeth', '2012-02-23T23:00:00', 'spupen45', 'images/8.jpg', ['janny_9991', 'stupen45'], ['cat', 'kitten', 'animals']));
+photoPosts.add(new PhotoPost('9', '9Cats have 30 teeth', '2011-02-23T23:00:00', 'AnaLiakh', 'images/9.jpg', ['janny_9991', 'stupen45'], ['cat', 'kitten', 'animals']));
+photoPosts.add(new PhotoPost('10', '10Cats have 30 teeth', '2010-02-23T23:00:00', 'AnaLiakh', 'images/9.jpg', ['janny_9991', 'stupen45'], ['cat', 'kitten', 'animals']));
+photoPosts.add(new PhotoPost('11', '11Cats have 30 teeth', '2009-02-23T23:00:00', 'AnaLiakh', 'images/9.jpg', ['janny_9991', 'stupen45'], ['cat', 'kitten', 'animals']));
+photoPosts.add(new PhotoPost('12', '12Funny animals', '2008-02-23T23:00:00', 'alex1', 'images/2.jpg', ['janny_9991', 'stupen45'], ['cat', 'kitten', 'animals']));
+photoPosts.add(new PhotoPost('13', '13nothing to add', '2007-02-23T23:00:00', 'spupen45', 'images/3.jpg', ['janny_9991', 'stupen45'], ['cat', 'kitten', 'animals']));
+photoPosts.add(new PhotoPost('14', '14Cats have 30 teeth', '2006-02-23T23:00:00', 'AnaLiakh', 'images/4.jpg', ['janny_9991', 'stupen45'], ['cat']));
+photoPosts.add(new PhotoPost('15', '15 Cats have 30 teeth', '2005-02-23T23:00:00', 'janny_9991', 'images/5.jpg', ['janny_9991', 'stupen45'], ['cat', 'kitten', 'animals']));
+photoPosts.add(new PhotoPost('16', '16 Cats have 30 teeth', '2004-02-23T23:00:00', 'AnaLiakh', 'images/6.jpg', ['janny_9991', 'stupen45'], ['cat', 'kitten', 'animals']));
+photoPosts.add(new PhotoPost('17', '17Cats have 30 teeth', '2003-02-23T23:00:00', 'AnaLiakh', 'images/7.jpg', ['janny_9991', 'stupen45'], ['cat', 'kitten', 'animals']));
+photoPosts.add(new PhotoPost('18', '18Cats have 30 teeth', '2002-02-23T23:00:00', 'spupen45', 'images/8.jpg', ['janny_9991', 'stupen45'], ['cat', 'kitten', 'animals']));
+photoPosts.add(new PhotoPost('19', '19Cats have 30 teeth', '2001-02-23T23:00:00', 'AnaLiakh', 'images/9.jpg', ['janny_9991', 'stupen45'], ['cat', 'kitten', 'animals']));
+photoPosts.add(new PhotoPost('20', '20Cats have 30 teeth', '2000-02-23T23:00:00', 'AnaLiakh', 'images/9.jpg', ['janny_9991', 'stupen45'], ['cat', 'kitten', 'animals']));
+const phototape = document.querySelector('.phototape');
+const view = new View(phototape, photoPosts);
+view.setAutorized(new User('liakh'));
 view.showPosts();
 view.addPost(new PhotoPost('20', 'New', '2005-02-23T23:00:00', 'stupen45', 'images/13.jpg', ['janny_9991', 'stupen45', 'alex1'], ['cat', 'kitten', 'animals']));
 view.removePost('20');

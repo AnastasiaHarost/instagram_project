@@ -49,9 +49,9 @@ header{
 .phototape{ 
     width: 640px;
     margin-top: 20px;
-    margin-left: 30%;
+    margin-left: 35%;
     margin-bottom: 50px;
-    display: inline-block;
+   
 }
 .post{
     margin-top: 30px; 
@@ -279,6 +279,7 @@ footer{
     background: linear-gradient(rgb(0, 0, 0), rgb(161, 159, 159)) rgb(255, 255, 255);
     transition: 0.2s;
   } 
+
   a.add-btn:hover {
      background: linear-gradient(rgb(58, 68, 207), rgb(34, 157, 214)) rgb(0, 83, 207);
   }
@@ -307,11 +308,11 @@ footer{
   }
   @media screen and (max-width: 1500px){
     .phototape{
-      margin-left:10%; 
+      margin-left:25%; 
     }
     .show-more-posts {
       
-      margin-left: 25%;
+      margin-left: 42%;
     }
   }
     @media screen and (max-width: 1150px){
@@ -353,6 +354,97 @@ footer{
           .show-more-posts {
             margin-left: 70%;
           }
-        
-          
         }
+/* Auth state */
+.is-auth .log-in {
+  display: none;
+}
+.is-auth .log-out button{
+  display: inline-block;
+}
+.is-auth .user{
+  display: inline-block;
+}
+.is-auth a.add-btn{
+  display: inline-block;
+}
+/* Edit */
+.edit-data{
+  display: inline-block;
+  margin: 0;
+}
+a.continue {
+  margin-top: 30px;
+  margin-left: 1px;
+  color: white;
+  text-decoration: none;
+  padding: 20px 30px;
+  outline: none;
+  border-width: 2px 0;
+  border-style: solid none;
+  border-radius: 6px;
+  background: linear-gradient(rgb(0, 0, 0), rgb(161, 159, 159)) rgb(255, 255, 255);
+  transition: 0.2s;
+} 
+
+a.continue:hover {
+   background: linear-gradient(rgb(58, 68, 207), rgb(34, 157, 214)) rgb(0, 83, 207);
+}
+.btn-continue{
+  margin-top: 400px;
+  margin-left: 300px;
+}
+.container{
+  margin-top: 200px;
+  margin-left: 30px;
+}
+.main-edit{
+  display: none;/*flex*/
+}
+a.add-file {
+  color: white;
+  text-decoration: none;
+  padding: 40px 60px;
+  outline: none;
+  border-width: 2px 0;
+  border-style: solid none;
+  border-radius: 6px;
+  background: linear-gradient(rgb(0, 0, 0), rgb(161, 159, 159)) rgb(255, 255, 255);
+  transition: 0.2s;
+} 
+a.add-file:hover {
+   background: linear-gradient(rgb(58, 68, 207), rgb(34, 157, 214)) rgb(0, 83, 207);
+}
+.edit-form{
+  font-size: 200%;
+  margin-left: 300px;
+  margin-top: 120px;
+}
+.description{
+  width: 300px;
+  height:70px;
+}
+.tags{
+  width: 300px;
+  height: 50px;
+}
+/* log-form */
+.main-log-form{
+  display: flex;
+}
+.log-form{
+  margin-top:  80px;
+  margin-left: 40%; 
+  width: 350px;
+  height: 400px; 
+  outline: 5px solid #000; /* Чёрная рамка */
+}
+.title{
+  font-size: 400%;
+  margin: 0;
+  margin-left: 40px
+}
+.log_in_field{
+  width: 200px;
+  height:20px;
+}
