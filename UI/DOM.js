@@ -14,17 +14,39 @@ class View {
       const key = phElement.getAttribute('data-target');
       if (key === 'photoLink') {
         phElement.src = post[key];
+      } else if (key === 'description') {
+        phElement.textContent = post[key].substring(0, 80);
       } else if (key === 'likes') {
         phElement.textContent = `${likes} likes `;
       } else { phElement.textContent = post[key]; }
     });
     const tagsBlock = newPost.querySelector('.hashtags');
     newPost.dataset.id = post.id;
+    newPost.dataset.likes = likes;
+    newPost.dataset.description = post.description;
     tagsBlock.innerHTML = post.hashtags.map(
       tag => `<li class="tag"><a href="" >#${tag}</a></li>`
     ).join('');
 
-
+    // Todo: get rid of the next lines
+    /* const user = new User('kasper');
+if (user instanceof User) {
+  newPost.querySelector('.like').dataset.liked = '0';
+  newPost.querySelector('.like').addEventListener('click', () => {
+    if (newPost.querySelector('.like').dataset.liked === '0') {
+      newPost.querySelector('.like').dataset.liked = '1';
+      newPost.querySelector('.likes-count').textContent = `${post.likes.length + 1} likes`;
+      newPost.querySelector('.like').style.backgroundColor = 'red';
+    } else {
+      newPost.querySelector('.like').dataset.liked = '0';
+      newPost.querySelector('.likes-count').textContent = `${post.likes.length} likes`;
+      newPost.querySelector('.like').style.backgroundColor = 'white';
+    }
+  });
+  newPost.querySelector('.delete').addEventListener('click', () => {
+    this.removePost(post.id);
+  });
+} */
     return newPost;
   }
 
@@ -80,7 +102,7 @@ class View {
 }
 
 const photoPosts = new PhotoPosts();
-photoPosts.add(new PhotoPost('1', '1Beautiful cat', '2019-02-23T23:00:00', 'janny_9991', 'images/1.jpg', ['janny_9991'], ['cat', 'kitten', 'animals', 'hello']));
+photoPosts.add(new PhotoPost('1', '1Beautiful catghvhgvhgvhgvhgggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggghgkvghvhgchgchhgchchrgeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee', '2019-02-23T23:00:00', 'janny_9991', 'images/1.jpg', ['janny_9991'], ['cat', 'kitten', 'animals', 'hello']));
 photoPosts.add(new PhotoPost('2', '2Funny animals', '2018-02-23T23:00:00', 'alex1', 'images/2.jpg', ['janny_9991', 'stupen45'], ['cat', 'kitten', 'animals']));
 photoPosts.add(new PhotoPost('3', '3nothing to add', '2017-02-23T23:00:00', 'spupen45', 'images/3.jpg', ['janny_9991', 'stupen45'], ['cat', 'kitten', 'animals']));
 photoPosts.add(new PhotoPost('4', '4Cats have 30 teeth', '2016-02-23T23:00:00', 'AnaLiakh', 'images/4.jpg', ['janny_9991', 'stupen45'], ['cat']));
@@ -111,4 +133,7 @@ view.editPost('3', {
   hashtags: ['planet'],
 });
 const mvc = new MVC(photoPosts, view);
+const photoTape = document.querySelector('.phototape');
 mvc.showMorePosts();
+mvc.addAllEvents(photoTape, new User('janny_9991'));
+// addAllListeners(view, photoTape, new User('janny_9991'));

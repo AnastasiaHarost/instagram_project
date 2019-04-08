@@ -61,19 +61,18 @@ header{
 }
     
 .like{
-    display: inline-block;
     width: 40px;
     height: 40px;
     cursor: pointer;
     border-radius: 50%;
-
+    display: none;
     box-shadow: 0 3px 20px rgba(0,0,0,.25),
     inset 0 2px 0 rgba(255,255,255,.6),
     0 2px 0 rgba(0,0,0,.1),
     inset 0 0 20px rgba(0,0,0,.1);
 }
 .edit{
-  
+  display: none;
   width: 40px;
   height: 40px;
   cursor: pointer;
@@ -85,7 +84,7 @@ header{
   inset 0 0 20px rgba(0,0,0,.1);
 }
 .delete{
-  
+  display: none;
   width: 40px;
   height: 40px;
   cursor: pointer;
@@ -130,9 +129,6 @@ footer{
   border-radius: 14px;
   box-shadow: 0 1px 1px 1px rgba(0,0,0,.25);
   font-size: 12px;
-}
-.description{
-  display: inline;
 }
 .text-container span{
   display: inline-block;
@@ -261,7 +257,7 @@ footer{
     background: linear-gradient(rgb(58, 68, 207), rgb(34, 157, 214)) rgb(0, 83, 207);
   }
   .btn-container{
-    
+    display: inline-block;
     margin-top: 50px; 
     margin-right: 0;
   }
@@ -368,6 +364,15 @@ footer{
 .is-auth a.add-btn{
   display: inline-block;
 }
+.is-auth .like{
+  display: inline-block;
+}
+.is-auth .edit{
+  display: inline-block;
+}
+.is-auth .delete{
+  display: inline-block;
+}
 /* Edit */
 .edit-data{
   display: inline-block;
@@ -391,7 +396,7 @@ a.continue:hover {
    background: linear-gradient(rgb(58, 68, 207), rgb(34, 157, 214)) rgb(0, 83, 207);
 }
 .btn-continue{
-  margin-top: 400px;
+  margin-top: 40px;
   margin-left: 300px;
 }
 .container{
@@ -399,7 +404,17 @@ a.continue:hover {
   margin-left: 30px;
 }
 .main-edit{
-  display: none;/*flex*/
+  display:none;/*flex*/
+}
+
+.main-delete{
+  display:none;
+}
+.main-log-form{
+  display: none;
+}
+.main-filters{
+  display: block;
 }
 a.add-file {
   color: white;
@@ -418,9 +433,9 @@ a.add-file:hover {
 .edit-form{
   font-size: 200%;
   margin-left: 300px;
-  margin-top: 120px;
+  
 }
-.description{
+.description-edit{
   width: 300px;
   height:70px;
 }
@@ -429,14 +444,12 @@ a.add-file:hover {
   height: 50px;
 }
 /* log-form */
-.main-log-form{
-  display: flex;
-}
+
 .log-form{
-  margin-top:  80px;
-  margin-left: 40%; 
+  margin-top:  180px;
+  margin-left: 600px ;
   width: 350px;
-  height: 400px; 
+  height: 300px; 
   outline: 5px solid #000; /* Чёрная рамка */
 }
 .title{
@@ -444,7 +457,155 @@ a.add-file:hover {
   margin: 0;
   margin-left: 40px
 }
-.log_in_field{
+.login{
+  margin-bottom: 30px;
+}
+.log-in-field{
   width: 200px;
-  height:20px;
+  height: 20px;
+  margin-left: 20px;
+  display: inline-flex;
+}
+.log{
+  font-weight: bold;
+  display: inline;
+}
+.pas{
+  font-weight: bold;
+  display: inline;
+}
+.pas-in-field{
+  width: 200px;
+  height: 20px;
+  margin-left: 20px;
+  display: inline-flex;
+}
+.wrong{
+  color: red;
+  display: none;
+}
+.sign-in-btn{
+    
+  margin-top: 50px; 
+  margin-right: 0;
+}
+a.sign-btn {
+  margin-top: 30px;
+  margin-left: 130px;
+  color: white;
+  text-decoration: none;
+  padding: 20px 20px;
+  outline: none;
+  border-width: 2px 0;
+  border-style: solid none;
+  border-radius: 6px;
+  background: linear-gradient(rgb(0, 0, 0), rgb(161, 159, 159)) rgb(255, 255, 255);
+  transition: 0.2s;
+} 
+
+a.sign-btn:hover {
+   background: linear-gradient(rgb(58, 68, 207), rgb(34, 157, 214)) rgb(0, 83, 207);
+}
+/* delete-form */
+.delete-form{
+
+  margin-top:  200px;
+  margin-left: 40%; 
+  width: 250px;
+  height: 120px; 
+  border-radius: 40px;
+  border-style: solid;
+  border-color: black;
+  
+}
+.del-question{
+  margin-left: 80px;
+}
+.del,.cancel {
+  width: 120px;
+  height: 60px; 
+  background-color: Transparent;
+  background-repeat:no-repeat;
+  border: none;
+  cursor:pointer;
+  overflow: hidden;
+  outline:none;
+}
+
+.vertical{
+  width: 1;
+  size: 100;
+  display: inline;
+}
+/*filters*/
+/*data*/
+.filt-data{
+  display: none;
+  position: absolute;
+  background: rgb(255, 255, 255);
+  margin-top:  100px;
+  margin-left: 40%; 
+  width: 200px;
+  height: 150px; 
+  outline: 5px solid #000; /* Чёрная рамка */
+}
+.from-data{
+  display: inline-block;
+  margin-top: 20px;
+}
+.from{
+  display: inline;
+}
+.field-filter-from{
+  width: 100px;
+  height: 20px;
+  margin-left: 20px;
+}
+.to{
+  margin-top: 10px;
+  display: inline;
+}
+.field-filter-to{
+  width: 100px;
+  height: 20px;
+  margin-left: 20px;
+}
+.filter-container{
+  margin-top: 20px; 
+}
+a.continue-btn {
+
+  margin-top: 30px;
+  margin-left: 50px;
+  color: white;
+  text-decoration: none;
+  padding: 10px 20px;
+  outline: none;
+  border-width: 2px 0;
+  border-style: solid none;
+  border-radius: 6px;
+  background: linear-gradient(rgb(0, 0, 0), rgb(161, 159, 159)) rgb(255, 255, 255);
+  transition: 0.2s;
+} 
+a.continue-btn:hover {
+   background: linear-gradient(rgb(58, 68, 207), rgb(34, 157, 214)) rgb(0, 83, 207);
+}
+/*user*/
+.filt-user-name{
+  margin-top:  100px;
+  margin-left: 40%; 
+  width: 200px;
+  position: absolute;
+  background: rgb(255, 255, 255);
+  height: 150px; 
+  outline: 5px solid #000; /* Чёрная рамка */
+  display: none;
+}
+.input-user{
+  margin-top: 30px;
+  margin-left: 20px;
+}
+.description{
+  display: inline;
+  width: 640px!important;
 }

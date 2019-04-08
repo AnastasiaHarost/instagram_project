@@ -15,19 +15,40 @@
          <button type="submit" class="submit"></button>
         </form>
                 <div class="btn-group">
-                    <button>Date</button>
-                    <button>User_name</button>
-                    <button>Hashtags</button>
+                    <button class="btn-group1">Date</button>
+                    <button class="btn-group2">User_name</button>
+                    <button class="btn-group3">Hashtags</button>
                   </div>  
                 <div class="user"></div>
                 <div class = "log-out">
-                    <button>Log out</button>
+                    <button class = "log-out">Log out</button>
                 </div>
                 <div class = "log-in">
-                        <button>Sign in</button>
+                    <button class = "log-in">Sign in</button>
                 </div>
          </header>
-    <main>
+         <main class="main-filters">
+            <div class="filt-data"> 
+                    <div class="from-data"><p class="from">Login</p>
+                        <textarea class="field-filter-from"  ></textarea>
+                    </div>
+                    <div class="to-data"><p class="to">Password</p>
+                        <textarea class="field-filter-from"  ></textarea>
+                    </div>
+                    <div class="filter-container">
+                        <a href="#" class="continue-btn">Continue</a>
+                    </div>
+            </div>
+            <div class="filt-user-name"> 
+                        <textarea class="input-user" placeholder="user_nickname" ></textarea>
+
+                    <div class="filter-container">
+                <a href="#" class="continue-btn">Continue</a>
+            </div>
+            </div>
+            
+    </main>     
+    <main class="main-def">
         <div class="btn-container">
             <a href="#" class="add-btn">add post</a>
         </div>
@@ -72,9 +93,31 @@
             <p class=edit-data><b>Author:</b>   User_name
             <br><b>Data & Time:</b>Time</p>
             <br><textarea class="tags" placeholder="#hashtags"></textarea>
-            <br><textarea class="description"  placeholder="Short description..."></textarea>
+            <br><textarea class="description-edit"  placeholder="Short description..."></textarea>
         </div>
         <div class=btn-continue><a href="#" class="continue">Continue</a></div>
+    </main>
+    <main class="main-delete">
+        <div class="delete-form">
+            <p class="del-question"><b>Delete post?</b>
+            <hr><button class="del">Cancel</button>
+            <hr class="vertical"><button class="cancel">Delete</button></p>
+        </div>
+    </main>
+    <main class="main-log-form">
+        <div class="log-form"> 
+            <p class=title>Photoblog</p>
+            <div class="login"><p class="log">Login</p>
+                <textarea class="log-in-field"  ></textarea>
+            </div>
+            <div class="password"><p class="pas">Password</p>
+                <textarea class="pas-in-field"  ></textarea>
+            </div>
+            <p class="wrong">*Wrong user or password</p>
+            <div class="sign-in-btn">
+                    <a href="#" class="sign-btn">add post</a>
+            </div>
+        </div>
     </main>
     <footer>
         <h2 class = "site-name"> Photoblog</h2>
