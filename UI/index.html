@@ -15,10 +15,22 @@
          <button type="submit" class="submit"></button>
         </form>
                 <div class="btn-group">
-                    <button class="btn-group1">Date</button>
-                    <button class="btn-group2">User_name</button>
-                    <button class="btn-group3">Hashtags</button>
-                  </div>  
+                    <button class="btn-group1 btn">Date</button>
+
+                    <button class="btn-group2 btn">User_name</button>
+
+                    <div class="dropdown-group">
+                        <label class="btn" for="hash-btn">Hashtags</label>
+                        <input type="checkbox" class="marker" id="hash-btn"/>
+                        <div class="dropdown-modal">
+                            <select multiple name="hashtags" class="select-param">
+                                <option value="cat">cat</option>
+                                <option value="home">home</option>
+                            </select>
+                        </div>
+                    </div>
+
+                </div>  
                 <div class="user"></div>
                 <div class = "log-out">
                     <button class = "log-out">Log out</button>
@@ -29,11 +41,11 @@
          </header>
          <main class="main-filters">
             <div class="filt-data"> 
-                    <div class="from-data"><p class="from">Login</p>
-                        <textarea class="field-filter-from"  ></textarea>
+                    <div class="from-data"><p class="from">From:</p>
+                        <input type="date" class="field-filter-from" value="1999-12-22"  >
                     </div>
-                    <div class="to-data"><p class="to">Password</p>
-                        <textarea class="field-filter-from"  ></textarea>
+                    <div class="to-data"><p class="to">To:</p>
+                        <input type="date" class="field-filter-to"  value="2999-12-22"  >   
                     </div>
                     <div class="filter-container">
                         <a href="#" class="continue-btn">Continue</a>
@@ -43,7 +55,7 @@
                         <textarea class="input-user" placeholder="user_nickname" ></textarea>
 
                     <div class="filter-container">
-                <a href="#" class="continue-btn">Continue</a>
+                <a href="#" class="continue-btn-uers">Continue</a>
             </div>
             </div>
             
@@ -74,7 +86,7 @@
                     <div class="text-container">
                         <span><b class="likes-count" data-target="likes"></b>
                         <br><b data-target="author"></b>
-                        <div class="description" data-target="description"></div>
+                        <div class="description exspanded" data-target="description"></div>
                         <button  class="myBtn">show more</button>
                         </span>
                         <ul class="hashtags">
@@ -88,14 +100,14 @@
         </div>
     </main>
     <main class="main-edit">
-        <div class=container><a href="#" class="add-file">Add file</a></div>
-        <div class="edit-form">
-            <p class=edit-data><b>Author:</b>   User_name
-            <br><b>Data & Time:</b>Time</p>
+        <form class="edit-form">
+            <input type="file" name="photo" multiple accept="image/*,image/jpeg">
+            <p class=edit-data><b>Author:</b><span class="usser-name"></span>
+            <br><b>Data & Time:</b><span class="time"></span></p>
             <br><textarea class="tags" placeholder="#hashtags"></textarea>
             <br><textarea class="description-edit"  placeholder="Short description..."></textarea>
-        </div>
-        <div class=btn-continue><a href="#" class="continue">Continue</a></div>
+            <div class=btn-continue><a href="#" class="continue">Continue</a></div>
+        </form>
     </main>
     <main class="main-delete">
         <div class="delete-form">
@@ -115,7 +127,7 @@
             </div>
             <p class="wrong">*Wrong user or password</p>
             <div class="sign-in-btn">
-                    <a href="#" class="sign-btn">add post</a>
+                    <a href="#" class="sign-btn">Sign in</a>
             </div>
         </div>
     </main>

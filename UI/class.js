@@ -1,10 +1,18 @@
 // 'use strict';
-
+const DEFAULT_FILTER = {
+  dateFrom: new Date(-8640000000000000),
+  dateTo: new Date(8640000000000000),
+  author: '',
+  hashtags: [],
+};
+const dateCo = {
+  year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric',
+};
 class PhotoPost {
   constructor(id, description, created, author, photoLink, likes = [], hashtags = []) {
     this.id = id;
     this.description = description;
-    this.create = new Date(created);
+    this.create = new Date(created).toLocaleString('en-Us', dateCo);
     this.author = author;
     this.photoLink = photoLink;
     this.likes = likes;
@@ -12,29 +20,42 @@ class PhotoPost {
   }
 
   _validate() {
-    return !(typeof (this.id) !== 'string' || typeof (this.description) !== 'string'
-            || typeof (this.author) !== 'string' || typeof (this.photoLink) !== 'string'
-            || !(this.create instanceof Date) || this.description.length >= 200
-            || !this.create || !this.author
-            || !this.id || !this.description || !this.photoLink);
+    if (!this.id || !this.description || this.description.length >= 200 || !this.create
+    || !this.author || this.author.length === 0 || !this.photoLink
+    || this.photoLink.length === 0) {
+      return false;
+    }
+    return true;
   }
 }
 
-const DEFAULT_FILTER = {
-  dateFrom: new Date(-8640000000000000),
-  dateTo: new Date(8640000000000000),
-  author: '',
-  hashtagstags: [],
-};
 class PhotoPosts {
   constructor() {
     this._posts = [];
+    this.restore();
+  }
+
+  save() {
+    localStorage.removeItem('posts');
+    const jsonPosts = JSON.stringify(this._posts);
+    localStorage.setItem('posts', jsonPosts);
+  }
+
+  restore() {
+    if (localStorage.length !== 0) {
+      const jsonPosts = localStorage.getItem('posts');
+      const objectsArray = JSON.parse(jsonPosts);
+      objectsArray.forEach((post) => {
+        this._posts.push(new PhotoPost(post.id, post.description, post.create, post.author, post.photoLink, post.hashtags, post.likes));
+      });
+    }
   }
 
   add(post) {
     const expost = this.get(post.id);
     if (!expost && post._validate()) {
-      this._posts.push(post);
+      this._posts.unshift(post);
+      this.save();
       return true;
     }
 
@@ -50,6 +71,7 @@ class PhotoPosts {
     const index = this._posts.findIndex(el => el.id === id);
     if (index !== -1) {
       this._posts.splice(index, 1);
+      this.save();
       return true;
     }
 
@@ -66,6 +88,7 @@ class PhotoPosts {
           .forEach(
             (key) => { expost[key] = edits[key]; },
           );
+        this.save();
         return true;
       }
       return false;
@@ -73,9 +96,9 @@ class PhotoPosts {
     return false;
   }
 
-  _isIntersect(posthashtagstags, confighashtagstags) {
-    return confighashtagstags.every(
-      postTag => posthashtagstags.indexOf(postTag) !== -1,
+  /* _isIntersect(posthashtags, confighashtags) {
+    return confighashtags.every(
+      postTag => posthashtags.indexOf(postTag) !== -1,
     );
   }
 
@@ -100,6 +123,21 @@ class PhotoPosts {
     return this._posts.filter(filterPredicate)
       .sort((a, b) => b.create - a.create).slice(skip, skip + top);
   }
+*/
+  getPage(skip = 0, top = 10, filterConfig = DEFAULT_FILTER) {
+    if (typeof skip !== 'number' || typeof top !== 'number' || typeof filterConfig !== 'object') {
+      return false;
+    }
+    filterConfig = Object.assign({}, DEFAULT_FILTER, filterConfig || {});
+    let filtered = this._posts
+      .filter(a => (new Date(a.create) >= filterConfig.dateFrom || !filterConfig.dateFrom)
+      && (new Date(a.create) <= filterConfig.dateTo || !filterConfig.dateTo)
+      && (a.author === filterConfig.author || filterConfig.author === '')
+      && (filterConfig.hashtags.length === 0
+      || filterConfig.hashtags.every(el => a.hashtags.includes(el))));
+    filtered = filtered.sort((a, b) => new Date(b.create) - new Date(a.create)).slice(skip, skip + top);
+    return filtered;
+  }
 
   addAll(posts) {
     const notValid = [];
@@ -109,6 +147,7 @@ class PhotoPosts {
         notValid.push(post);
       }
     });
+    this.save();
     return notValid;
   }
 
@@ -148,7 +187,7 @@ const posts = [
     author: 23,
     photoLink: 'images/1',
     likes: ['janny_9991'],
-    hashtagstags: ['cat', 'kitten', 'animals', 'hello'],
+    hashtags: ['cat', 'kitten', 'animals', 'hello'],
   },
   {
     id: '56',
@@ -157,7 +196,7 @@ const posts = [
     author: 'alex1',
     photoLink: 'images/2',
     likes: ['janny_9991', 'stupen45'],
-    hashtagstags: ['cat', 'kitten', 'animals'],
+    hashtags: ['cat', 'kitten', 'animals'],
   },
   {
     id: '57',
@@ -166,7 +205,7 @@ const posts = [
     author: 'spupen45',
     photoLink: 'images/3',
     likes: ['janny_9991', 'stupen45'],
-    hashtagstags: ['cat', 'kitten', 'animals'],
+    hashtags: ['cat', 'kitten', 'animals'],
   },
 ];
 
@@ -187,7 +226,7 @@ console.log(photoPosts.get('3'));
 console.log('try to edit id=3 post:');
 console.log(photoPosts.edit('3', {
   description: 'new description',
-  hashtagstags: ['planet'],
+  hashtags: ['planet'],
 }));
 console.log('id=3 post after editing:');
 console.log(photoPosts.get('3'));
@@ -203,12 +242,12 @@ console.log(photoPosts.getPage(0, 10, {
   dateTo: new Date('2018-02-23T23:00:00'),
 }));
 console.log('posts after filtering by hashtagstag "world"');
-console.log(photoPosts.getPage(0, 10, { hashtagstags: ['world'] }));
-console.log('posts after filtering by hashtagstags "world" and "cat"');
-console.log(photoPosts.getPage(0, 10, { hashtagstags: ['world', 'cat'] }));
-console.log('posts after filtering by hashtagstags,author and date ( 2015-2001)');
+console.log(photoPosts.getPage(0, 10, { hashtags: ['world'] }));
+console.log('posts after filtering by hashtags "world" and "cat"');
+console.log(photoPosts.getPage(0, 10, { hashtags: ['world', 'cat'] }));
+console.log('posts after filtering by hashtags,author and date ( 2015-2001)');
 console.log(photoPosts.getPage(0, 10, {
-  hashtagstags: ['cat', 'kitten'],
+  hashtags: ['cat', 'kitten'],
   author: 'AnaLiakh',
   dateFrom: new Date('2001-10-23T10:00:00'),
   dateTo: new Date('2015-02-23T23:00:00'),
