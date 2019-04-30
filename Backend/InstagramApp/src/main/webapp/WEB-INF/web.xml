@@ -6,11 +6,20 @@
 
     <servlet>
         <servlet-name>PostsServlet</servlet-name>
-        <servlet-class>bsu.fpmi.instagram.PostsServlet</servlet-class>
+        <servlet-class>bsu.fpmi.instagram.RestServices.PostREST</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>PostsServlet</servlet-name>
-        <url-pattern>/posts</url-pattern>
+        <url-pattern>/photo-post</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>PostsListServlet</servlet-name>
+        <servlet-class>bsu.fpmi.instagram.RestServices.PostListREST</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PostsListServlet</servlet-name>
+        <url-pattern>/photoposts</url-pattern>
     </servlet-mapping>
 
 </web-app>
