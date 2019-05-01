@@ -30,4 +30,40 @@
         <url-pattern>/get</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>ThirdJsp</servlet-name>
+        <servlet-class>ThirdServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ThirdJsp</servlet-name>
+        <url-pattern>/check</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>FourthJsp</servlet-name>
+        <jsp-file>/fourthJsp.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>FourthJsp</servlet-name>
+        <url-pattern>/test1</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>FifthJsp</servlet-name>
+        <jsp-file>/fifthJsp.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>FifthJsp</servlet-name>
+        <url-pattern>/test2</url-pattern>
+    </servlet-mapping>
+
+    <filter>
+        <filter-name>TimeMeasurementFilter</filter-name>
+        <filter-class>TimeMeasurementFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>TimeMeasurementFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
 </web-app>
