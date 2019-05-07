@@ -1,0 +1,1 @@
+SELECT DISTINCT user.NAME FROM `kyky`.user

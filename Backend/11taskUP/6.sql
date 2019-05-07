@@ -1,0 +1,1 @@
+SELECT user.NAME FROM `kyky`.user

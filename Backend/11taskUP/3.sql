@@ -1,0 +1,2 @@
+SELECT * FROM `kyky`.photo_post 
+	WHERE USER_ID = 123 AND DATE(CREATE_DATE) = '2019-11-20'
