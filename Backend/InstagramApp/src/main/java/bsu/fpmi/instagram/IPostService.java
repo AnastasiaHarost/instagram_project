@@ -5,10 +5,10 @@ import bsu.fpmi.instagram.common.Post;
 import java.util.ArrayList;
 
 public interface IPostService {
-    Post getPost(int id);
+    Post getPost(String id);
     ArrayList<Post> getPage(int skip, int top, FilterConfig filterConfig);
     boolean addPost(Post post);
-    boolean deletePost(int id);
+    boolean deletePost(String id);
     boolean editPost(Post newPost);
 
 }

@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class PostListREST extends HttpServlet {
+public class PostListRest extends HttpServlet {
     private InMemoryPostService service;
     private Gson gson;
 
@@ -22,6 +22,6 @@ public class PostListREST extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.getWriter().println(gson.toJson(service.getPage(0,10,new FilterConfig())));
+        response.getWriter().write(gson.toJson(service.getPage(0,10,new FilterConfig())));
     }
 }

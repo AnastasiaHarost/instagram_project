@@ -6,7 +6,7 @@
 
     <servlet>
         <servlet-name>PostsServlet</servlet-name>
-        <servlet-class>bsu.fpmi.instagram.RestServices.PostREST</servlet-class>
+        <servlet-class>bsu.fpmi.instagram.RestServices.PostRest</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>PostsServlet</servlet-name>
@@ -15,11 +15,29 @@
 
     <servlet>
         <servlet-name>PostsListServlet</servlet-name>
-        <servlet-class>bsu.fpmi.instagram.RestServices.PostListREST</servlet-class>
+        <servlet-class>bsu.fpmi.instagram.RestServices.PostListRest</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>PostsListServlet</servlet-name>
         <url-pattern>/photoposts</url-pattern>
     </servlet-mapping>
 
+    <filter>
+        <filter-name>TimeMeasurementFilter</filter-name>
+        <filter-class>bsu.fpmi.instagram.common.TimeMeasurementFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>TimeMeasurementFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <servlet>
+        <servlet-name>UploadServlet</servlet-name>
+        <servlet-class>bsu.fpmi.instagram.RestServices.UploadServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>UploadServlet</servlet-name>
+        <url-pattern>/upload</url-pattern>
+    </servlet-mapping>
 </web-app>
