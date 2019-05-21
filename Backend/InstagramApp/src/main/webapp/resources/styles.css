@@ -179,7 +179,7 @@ footer{
     -webkit-appearance: none;
   }
   .post-time{
-    margin-left: 400px;
+    margin-left: 350px;
   }
   .btn-group button {
     margin-top: 20px;
@@ -377,16 +377,20 @@ footer{
   display: inline-block;
 }
 /* Edit */
+
 .edit-data{
   display: inline-block;
-  margin: 0;
+  font-size:30px;
+}
+.input-edit{
+ display: block;
 }
 a.continue {
   margin-top: 30px;
   margin-left: 1px;
   color: white;
   text-decoration: none;
-  padding: 20px 30px;
+  padding: 10px 10px;
   outline: none;
   border-width: 2px 0;
   border-style: solid none;
@@ -400,7 +404,7 @@ a.continue:hover {
 }
 .btn-continue{
   margin-top: 40px;
-  margin-left: 300px;
+  margin-left: 200px;
 }
 .container{
   display: inline;
@@ -435,8 +439,8 @@ a.add-file:hover {
    background: linear-gradient(rgb(58, 68, 207), rgb(34, 157, 214)) rgb(0, 83, 207);
 }
 .edit-form{
-  font-size: 400%;
-  margin-left: 300px;
+  font-size: 200%;
+  /*margin-left: 300px;*/
   
 }
 .description-edit{
@@ -544,7 +548,6 @@ a.sign-btn:hover {
 /*filters*/
 /*data*/
 .filt-data{
-  display: none;
   position: absolute;
   z-index: 1000;
   background: rgb(255, 255, 255);
@@ -576,7 +579,8 @@ a.sign-btn:hover {
   margin-left: 20px;
 }
 .filter-container{
-  margin-top: 20px; 
+  margin-top: 13px; 
+  
 }
 a.continue-btn,a.continue-btn-uers {
 
@@ -605,7 +609,6 @@ a.continue-btn:hover,a.continue-btn-uers:hover {
   background: rgb(255, 255, 255);
   height: 150px; 
   outline: 5px solid #000; /* Чёрная рамка */
-  display: none;
 }
 .input-user{
   margin-top: 30px;
@@ -662,4 +665,8 @@ a.continue-btn:hover,a.continue-btn-uers:hover {
 }
 .filt-data input{
   width: 150px;
+}
+
+.hide {
+  display: none;
 }

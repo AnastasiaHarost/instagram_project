@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://java.sun.com/xml/ns/javaee"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+         version="3.0">
+
+    <servlet>
+        <servlet-name>PostsServlet</servlet-name>
+        <servlet-class>bsu.fpmi.instagram.RestServices.PostREST</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PostsServlet</servlet-name>
+        <url-pattern>/photo-post</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>PostsListServlet</servlet-name>
+        <servlet-class>bsu.fpmi.instagram.RestServices.PostListREST</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PostsListServlet</servlet-name>
+        <url-pattern>/photoposts</url-pattern>
+    </servlet-mapping>
+
+</web-app>

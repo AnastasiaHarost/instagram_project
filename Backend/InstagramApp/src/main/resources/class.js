@@ -27,6 +27,10 @@ class PhotoPost {
     }
     return true;
   }
+
+  isLiked(user) {
+    return this.likes.includes(user);
+  }
 }
 
 class PhotoPosts {
@@ -46,7 +50,7 @@ class PhotoPosts {
       const jsonPosts = localStorage.getItem('posts');
       const objectsArray = JSON.parse(jsonPosts);
       objectsArray.forEach((post) => {
-        this._posts.push(new PhotoPost(post.id, post.description, post.create, post.author, post.photoLink, post.hashtags, post.likes));
+        this._posts.push(new PhotoPost(post.id, post.description, post.create, post.author, post.photoLink, post.likes, post.hashtags));
       });
     }
   }
@@ -60,6 +64,17 @@ class PhotoPosts {
     }
 
     return false;
+  }
+
+  toggleLike(postid, user) {
+    const post = this.get(postid);
+    if (post.isLiked(user)) {
+      const index = post.likes.indexOf(user);
+      post.likes.splice(index, 1);
+    } else {
+      post.user.push(user);
+    }
+    return post;
   }
 
   get(id) {
@@ -131,10 +146,10 @@ class PhotoPosts {
     filterConfig = Object.assign({}, DEFAULT_FILTER, filterConfig || {});
     let filtered = this._posts
       .filter(a => (new Date(a.create) >= filterConfig.dateFrom || !filterConfig.dateFrom)
-      && (new Date(a.create) <= filterConfig.dateTo || !filterConfig.dateTo)
-      && (a.author === filterConfig.author || filterConfig.author === '')
-      && (filterConfig.hashtags.length === 0
-      || filterConfig.hashtags.every(el => a.hashtags.includes(el))));
+    && (new Date(a.create) <= filterConfig.dateTo || !filterConfig.dateTo)
+    && (a.author === filterConfig.author || filterConfig.author === '')
+    && (filterConfig.hashtags.length === 0
+    || filterConfig.hashtags.every(el => a.hashtags.includes(el))));
     filtered = filtered.sort((a, b) => new Date(b.create) - new Date(a.create)).slice(skip, skip + top);
     return filtered;
   }

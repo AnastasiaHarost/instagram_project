@@ -8,356 +8,128 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 </head>
 <body>
-    
-    <header>
-        <h2 class = "site-name">Photoblog</h2>
+        <header>
+                <h2 class = "site-name">Photoblog</h2>
         <form action="javascript:alert('hi')" method="post" class="search-form">
-                <input type="search" name="search" placeholder="search" class="input" />
-                <button type="submit" class="submit"></button>
+                        <input type="search" name="search" placeholder="search" class="input" />
+         <button type="submit" class="submit"></button>
         </form>
-        <div class="btn-group">
-            <button>Date</button>
-            <button>User_name</button>
-            <button>Hashtags</button>
-          </div>
-          <div class="user">user1</div>
-          <div class = "log-out">
-            <button>Log out</button>
-          </div>
-    </header>
+                <div class="btn-group">
+                    <button class="btn-group1 btn">Date</button>
 
-    <main>
+                    <button class="btn-group2 btn">User_name</button>
+
+                    <div class="dropdown-group">
+                        <label class="btn" for="hash-btn">Hashtags</label>
+                        <input type="checkbox" class="marker" id="hash-btn"/>
+                        <div class="dropdown-modal">
+                            <select multiple name="hashtags" class="select-param">
+                                <option value="cat">cat</option>
+                                <option value="home">home</option>
+                            </select>
+                        </div>
+                    </div>
+
+                </div>  
+                <div class="user"></div>
+                <div class = "log-out">
+                    <button class = "log-out">Log out</button>
+                </div>
+                <div class = "log-in">
+                    <button class = "log-in">Sign in</button>
+                </div>
+         </header>
+         <main class="main-filters">
+            <div class="filt-data"> 
+                    <div class="from-data"><p class="from">From:</p>
+                        <input type="date" class="field-filter-from" value="1999-12-22"  >
+                    </div>
+                    <div class="to-data"><p class="to">To:</p>
+                        <input type="date" class="field-filter-to"  value="2999-12-22"  >   
+                    </div>
+                    <div class="filter-container">
+                        <a href="#" class="continue-btn">Continue</a>
+                    </div>
+            </div>
+            <div class="filt-user-name"> 
+                        <textarea class="input-user" placeholder="user_nickname" ></textarea>
+
+                    <div class="filter-container">
+                <a href="#" class="continue-btn-uers">Continue</a>
+            </div>
+            </div>
+            
+    </main>     
+    <main class="main-def">
         <div class="btn-container">
             <a href="#" class="add-btn">add post</a>
         </div>
         <div class = "phototape">
-            <div class = "post">
-                <div class="user_name">
-                    user1
-                </div>
-                <div class="image">
-                    <img src = "images/1.jpg" alt = "cat" width= "100%" >
-                </div>
-                
-                <button type="submit" class="like"  >
+            <template id="post-template">
+                <div class = "post">
+                    <div class="user_name" data-target = "author">
+                    </div>
+                    <div class="image">
+                        <img data-target="photoLink" alt = "cat" width= "100%" >
+                    </div>
+                    <button type="submit" class="like" >
                     <i class="far fa-heart fa-lg"  data-fa-transform="shrink-8 right-6"  data-fa-transform="shrink-8 down-116"></i>
-                </button>
-                    <time class="post-time" datetime="2017-03-02T02:44" title="2017-03-02 at 02:44 AM">
-                        2017-03-02 at 02:44 AM
+                    </button>
+                    <button type="submit" class="edit">
+                    <i class="far fa-edit"  data-fa-transform="shrink-8 right-6"  data-fa-transform="shrink-8 down-116"></i>
+                    </button>
+                    <button type="submit" class="delete"  >
+                    <i class="fas fa-trash-alt"  data-fa-transform="shrink-8 right-6"  data-fa-transform="shrink-8 down-116"></i>
+                    </button>
+                    <time class="post-time" data-target="create">
                     </time>
-                
-                <div class="text-container">
-                        <p>
-                            <b>3 likes</b>
-                            <br><b> user1 </b>Cats have been domesticated for around 4,000 years. <span class="dots">...</span><span class="more">
-                                While they were once valued for their hunting abilities,
-                                 they are now valued for their companionship and loving 
-                                 behaviour.</span> 
-                                 <button  class="myBtn">show more</button>
-                        </p>
-                        <ul class="tag-list">
-                            <li class="tag"><a href="/search/cats/" >#cats</a></li>
-                            <li class="tag"><a href="/search/kitten/" >#kitten</a></li>
-                            <li class="tag"><a href="/search/beauty/" >#beauty</a></li>
-                            <li class="tag"><a href="/search/kittenlife/">#kittenlife</a></li>
+                    <div class="text-container">
+                        <span><b class="likes-count" data-target="likes"></b>
+                        <br><b data-target="author"></b>
+                        <div class="description exspanded" data-target="description"></div>
+                        <button  class="myBtn">show more</button>
+                        </span>
+                        <ul class="hashtags">
                         </ul>
-                    </div>​
+                    </div>
                 </div>
-            <div class = "post">
-                <div class="user_name">
-                    user2
-                </div>
-                <div class="image">
-                    <img src = "images/2.jpg" alt = "cat" width= "100%">
-                </div>
-                <button type="submit" class="like"  >
-                        <i class="far fa-heart fa-lg"  data-fa-transform="shrink-8 right-6"  data-fa-transform="shrink-8 down-116"></i>
-                        </button>
-                <time class="post-time" datetime="2014-06-27T03:56" title="2014-06-27 at 03:56 AM">
-                    2014-06-27 at 03:56 AM
-                </time>
-                <div class="text-container">
-                        <p><b>7 likes</b>
-                            <br><b> user2 </b>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum interdum,
-                             nisi lorem egestas vitae scel<span class="dots">...</span><span class="more">
-                                 erisque enim ligula venenatis dolor. Maecenas nisl est, ultrices 
-                                 nec congue eget, auctor vitae massa. Fusce luctus vestibulum augue 
-                                 ut aliquet. Nunc sagittis dictum nisi, sed ullamcorper ipsum 
-                                 dignissim ac. In at libero sed nunc venenatis imperdiet sed 
-                                 ornare turpis. Donec vitae dui eget tellus gravida venenatis. 
-                                 Integer fringilla congue eros non fermentum. Sed dapibus pulvinar
-                                nibh tempor porta.</span> <button  class="myBtn">show more</button></p>
-                                  <ul class="tag-list">
-                                    <li class="tag"><a href="/search/cats/" >#cats</a></li>
-                                    <li class="tag"><a href="/search/kitten/" >#kitten</a></li>
-                                    <li class="tag"><a href="/search/beauty/" >#beauty</a></li>
-                                    <li class="tag"><a href="/search/kittenlife/">#kittenlife</a></li>
-                                </ul>
-                    </div>​
-
-            </div>
-            <div class = "post">
-                <div class="user_name">
-                    user3
-                </div>
-                <div class="image">
-                    <img src = "images/3.jpg" alt = "cat" width= "100%">
-                </div>
-                <button type="submit" class="like"  >
-                        <i class="far fa-heart fa-lg"  data-fa-transform="shrink-8 right-6"  data-fa-transform="shrink-8 down-116"></i>
-                        </button>
-                <time class="post-time" datetime="2011-12-14T16:16" title="2011-12-14 at 04:16 PM">
-                    2011-12-14 at 04:16 PM
-                </time>
-                <div class="text-container">
-                        <p><b>4 likes</b>
-                            <br><b> user3 </b>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum interdum,
-                             nisi lorem egestas vitae scel<span class="dots">...</span><span class="more">
-                                 erisque enim ligula venenatis dolor. Maecenas nisl est, ultrices 
-                                 nec congue eget, auctor vitae massa. Fusce luctus vestibulum augue 
-                                 ut aliquet. Nunc sagittis dictum nisi, sed ullamcorper ipsum 
-                                 dignissim ac. In at libero sed nunc venenatis imperdiet sed 
-                                 ornare turpis. Donec vitae dui eget tellus gravida venenatis. 
-                                 Integer fringilla congue eros non fermentum. Sed dapibus pulvinar
-                                  nibh tempor porta.</span> <button  class="myBtn">show more</button></p>
-                                  <ul class="tag-list">
-                                    <li class="tag"><a href="/search/cats/" >#cats</a></li>
-                                    <li class="tag"><a href="/search/kitten/" >#kitten</a></li>
-                                    <li class="tag"><a href="/search/beauty/" >#beauty</a></li>
-                                    <li class="tag"><a href="/search/kittenlife/">#kittenlife</a></li>
-                                </ul>
-                    </div>​
-            </div>
-            <div class= "post">
-                <div class="user_name">
-                   user3
-                </div>
-                <div class="image">
-                    <img src = "images/4.jpg" alt = "cat" width= "100%">
-                </div>
-                <button type="submit" class="like"  >
-                        <i class="far fa-heart fa-lg"  data-fa-transform="shrink-8 right-6"  data-fa-transform="shrink-8 down-116"></i>
-                        </button>
-                <time class="post-time" datetime="2011-12-14T16:16" title="2011-12-14 at 04:16 PM">
-                    2011-12-14 at 04:16 PM
-                </time>
-                <div class="text-container">
-                        <p><b>17 likes</b>
-                            <br><b> user3 </b>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum interdum,
-                             nisi lorem egestas vitae scel<span class="dots">...</span><span class="more">
-                                 erisque enim ligula venenatis dolor. Maecenas nisl est, ultrices 
-                                 nec congue eget, auctor vitae massa. Fusce luctus vestibulum augue 
-                                 ut aliquet. Nunc sagittis dictum nisi, sed ullamcorper ipsum 
-                                 dignissim ac. In at libero sed nunc venenatis imperdiet sed 
-                                 ornare turpis. Donec vitae dui eget tellus gravida venenatis. 
-                                 Integer fringilla congue eros non fermentum. Sed dapibus pulvinar
-                                  nibh tempor porta.</span> <button  class="myBtn">show more</button></p>
-                                  <ul class="tag-list">
-                                    <li class="tag"><a href="/search/cats/" >#cats</a></li>
-                                    <li class="tag"><a href="/search/kitten/" >#kitten</a></li>
-                                    <li class="tag"><a href="/search/beauty/" >#beauty</a></li>
-                                    <li class="tag"><a href="/search/kittenlife/">#kittenlife</a></li>
-                                </ul>
-                    </div>​
-            </div>
-            <div class = "post">
-                <div class="user_name">
-                    user2
-                </div>
-                <div class="image">
-                    <img src = "images/5.jpg" alt = "cat" width= "100%">
-                </div>
-                <button type="submit" class="like"  >
-                        <i class="far fa-heart fa-lg"  data-fa-transform="shrink-8 right-6"  data-fa-transform="shrink-8 down-116"></i>
-                        </button>
-                <time class="post-time" datetime="2011-12-14T16:16" title="2011-12-14 at 04:16 PM">
-                    2011-12-14 at 04:16 PM
-                </time>
-                <div class="text-container">
-                        <p><b>2 likes</b>
-                            <br><b> user3 </b>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum interdum,
-                             nisi lorem egestas vitae scel<span class="dots">...</span><span class="more">
-                                 erisque enim ligula venenatis dolor. Maecenas nisl est, ultrices 
-                                 nec congue eget, auctor vitae massa. Fusce luctus vestibulum augue 
-                                 ut aliquet. Nunc sagittis dictum nisi, sed ullamcorper ipsum 
-                                 dignissim ac. In at libero sed nunc venenatis imperdiet sed 
-                                 ornare turpis. Donec vitae dui eget tellus gravida venenatis. 
-                                 Integer fringilla congue eros non fermentum. Sed dapibus pulvinar
-                                  nibh tempor porta.</span> <button  class="myBtn">show more</button></p>
-                                  <ul class="tag-list">
-                                    <li class="tag"><a href="/search/cats/" >#cats</a></li>
-                                    <li class="tag"><a href="/search/kitten/" >#kitten</a></li>
-                                    <li class="tag"><a href="/search/beauty/" >#beauty</a></li>
-                                    <li class="tag"><a href="/search/kittenlife/">#kittenlife</a></li>
-                                </ul>
-                    </div>​
-            </div>
-            <div class = "post">
-                <div class="user_name">
-                    user3
-                </div>
-                <div class="image">
-                    <img src = "images/6.jpg" alt = "cat" width= "100%">
-                </div>
-                <button type="submit" class="like"  >
-                        <i class="far fa-heart fa-lg"  data-fa-transform="shrink-8 right-6"  data-fa-transform="shrink-8 down-116"></i>
-                        </button>
-                <time class="post-time" datetime="2011-12-14T16:16" title="2011-12-14 at 04:16 PM">
-                    2011-12-14 at 04:16 PM
-                </time>
-                <div class="text-container">
-                        <p><b>5 likes</b>
-                            <br><b> user3 </b>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum interdum,
-                             nisi lorem egestas vitae scel<span class="dots">...</span><span class="more">
-                                 erisque enim ligula venenatis dolor. Maecenas nisl est, ultrices 
-                                 nec congue eget, auctor vitae massa. Fusce luctus vestibulum augue 
-                                 ut aliquet. Nunc sagittis dictum nisi, sed ullamcorper ipsum 
-                                 dignissim ac. In at libero sed nunc venenatis imperdiet sed 
-                                 ornare turpis. Donec vitae dui eget tellus gravida venenatis. 
-                                 Integer fringilla congue eros non fermentum. Sed dapibus pulvinar
-                                  nibh tempor porta.</span> <button  class="myBtn">show more</button></p>
-                                  <ul class="tag-list">
-                                    <li class="tag"><a href="/search/cats/" >#cats</a></li>
-                                    <li class="tag"><a href="/search/kitten/" >#kitten</a></li>
-                                    <li class="tag"><a href="/search/beauty/" >#beauty</a></li>
-                                    <li class="tag"><a href="/search/kittenlife/">#kittenlife</a></li>
-                                </ul>
-                    </div>​
-            </div>
-            <div class = "post">
-                <div class="user_name">
-                    user1
-                </div>
-                <div class="image">
-                    <img src = "images/7.jpg" alt = "cat" width= "100%">
-                </div>
-                <button type="submit" class="like"  >
-                        <i class="far fa-heart fa-lg"  data-fa-transform="shrink-8 right-6"  data-fa-transform="shrink-8 down-116"></i>
-                        </button>
-                <time class="post-time" datetime="2011-12-14T16:16" title="2011-12-14 at 04:16 PM">
-                    2011-12-14 at 04:16 PM
-                </time>
-                <div class="text-container">
-                        <p><b>8 likes</b>
-                            <br><b> user3 </b>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum interdum,
-                             nisi lorem egestas vitae scel<span class="dots">...</span><span class="more">
-                                 erisque enim ligula venenatis dolor. Maecenas nisl est, ultrices 
-                                 nec congue eget, auctor vitae massa. Fusce luctus vestibulum augue 
-                                 ut aliquet. Nunc sagittis dictum nisi, sed ullamcorper ipsum 
-                                 dignissim ac. In at libero sed nunc venenatis imperdiet sed 
-                                 ornare turpis. Donec vitae dui eget tellus gravida venenatis. 
-                                 Integer fringilla congue eros non fermentum. Sed dapibus pulvinar
-                                  nibh tempor porta.</span> <button  class="myBtn">show more</button></p>
-                                  <ul class="tag-list">
-                                    <li class="tag"><a href="/search/cats/" >#cats</a></li>
-                                    <li class="tag"><a href="/search/kitten/" >#kitten</a></li>
-                                    <li class="tag"><a href="/search/beauty/" >#beauty</a></li>
-                                    <li class="tag"><a href="/search/kittenlife/">#kittenlife</a></li>
-                                </ul>
-                    </div>​
-            </div>
-            <div class = "post">
-                <div class="user_name">
-                    user1
-                </div>
-                <div class="image">
-                    <img src = "images/8.jpg" alt = "cat" width= "100%">
-                </div>
-                <button type="submit" class="like"  >
-                        <i class="far fa-heart fa-lg"  data-fa-transform="shrink-8 right-6"  data-fa-transform="shrink-8 down-116"></i>
-                        </button>
-                <time  class="post-time" datetime="2011-12-14T16:16" title="2011-12-14 at 04:16 PM">
-                    2011-12-14 at 04:16 PM
-                </time>
-                <div class="text-container">
-                        <p><b>13 likes</b>
-                            <br><b> user3 </b>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum interdum,
-                             nisi lorem egestas vitae scel<span class="dots">...</span><span class="more">
-                                 erisque enim ligula venenatis dolor. Maecenas nisl est, ultrices 
-                                 nec congue eget, auctor vitae massa. Fusce luctus vestibulum augue 
-                                 ut aliquet. Nunc sagittis dictum nisi, sed ullamcorper ipsum 
-                                 dignissim ac. In at libero sed nunc venenatis imperdiet sed 
-                                 ornare turpis. Donec vitae dui eget tellus gravida venenatis. 
-                                 Integer fringilla congue eros non fermentum. Sed dapibus pulvinar
-                                  nibh tempor porta.</span> <button  class="myBtn">show more</button></p>
-                                  <ul class="tag-list">
-                                    <li class="tag"><a href="/search/cats/" >#cats</a></li>
-                                    <li class="tag"><a href="/search/kitten/" >#kitten</a></li>
-                                    <li class="tag"><a href="/search/beauty/" >#beauty</a></li>
-                                    <li class="tag"><a href="/search/kittenlife/">#kittenlife</a></li>
-                                </ul>
-                    </div>​
-            </div>
-            <div class = "post">
-                <div class="user_name">
-                    user2
-                </div>
-                <div class="image">
-                    <img src = "images/9.jpg" alt = "cat" width= "100%">
-                </div>
-                <button type="submit" class="like"  >
-                        <i class="far fa-heart fa-lg"  data-fa-transform="shrink-8 right-6"  data-fa-transform="shrink-8 down-116"></i>
-                        </button>
-                <time class="post-time" datetime="2011-12-14T16:16" title="2011-12-14 at 04:16 PM">
-                    2011-12-14 at 04:16 PM
-                </time>
-                <div class="text-container">
-                        <p><b>23 likes</b>
-                            <br><b> user3 </b>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum interdum,
-                             nisi lorem egestas vitae scel<span class="dots">...</span><span class="more">
-                                 erisque enim ligula venenatis dolor. Maecenas nisl est, ultrices 
-                                 nec congue eget, auctor vitae massa. Fusce luctus vestibulum augue 
-                                 ut aliquet. Nunc sagittis dictum nisi, sed ullamcorper ipsum 
-                                 dignissim ac. In at libero sed nunc venenatis imperdiet sed 
-                                 ornare turpis. Donec vitae dui eget tellus gravida venenatis. 
-                                 Integer fringilla congue eros non fermentum. Sed dapibus pulvinar
-                                  nibh tempor porta.</span> <button  class="myBtn">show more</button></p>
-                                  <ul class="tag-list">
-                                    <li class="tag"><a href="/search/cats/" >#cats</a></li>
-                                    <li class="tag"><a href="/search/kitten/" >#kitten</a></li>
-                                    <li class="tag"><a href="/search/beauty/" >#beauty</a></li>
-                                    <li class="tag"><a href="/search/kittenlife/">#kittenlife</a></li>
-                                </ul>
-                    </div>​
-            </div>
-            <div class = "post">
-                <div class="user_name">
-                    user3
-                </div>
-                <div class="image">
-                    <img src = "images/10.jpg" alt = "cat" width= "100%">
-                </div>
-                <button type="submit" class="like"  >
-                        <i class="far fa-heart fa-lg"  data-fa-transform="shrink-8 right-6"  data-fa-transform="shrink-8 down-116"></i>
-                        </button>
-                <time class="post-time" datetime="2011-12-14T16:16" title="2011-12-14 at 04:16 PM">
-                    2011-12-14 at 04:16 PM
-                </time>
-                <div class="text-container">
-                        <p><b>7 likes</b>
-                            <br><b> user3 </b>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum interdum,
-                             nisi lorem egestas vitae scel<span class="dots">...</span><span class="more">
-                                 erisque enim ligula venenatis dolor. Maecenas nisl est, ultrices 
-                                 nec congue eget, auctor vitae massa. Fusce luctus vestibulum augue 
-                                 ut aliquet. Nunc sagittis dictum nisi, sed ullamcorper ipsum 
-                                 dignissim ac. In at libero sed nunc venenatis imperdiet sed 
-                                 ornare turpis. Donec vitae dui eget tellus gravida venenatis. 
-                                 Integer fringilla congue eros non fermentum. Sed dapibus pulvinar
-                                  nibh tempor porta.</span> <button  class="myBtn">show more</button></p>
-                                  <ul class="tag-list">
-                                    <li class="tag"><a href="/search/cats/" >#cats</a></li>
-                                    <li class="tag"><a href="/search/kitten/" >#kitten</a></li>
-                                    <li class="tag"><a href="/search/beauty/" >#beauty</a></li>
-                                    <li class="tag"><a href="/search/kittenlife/">#kittenlife</a></li>
-                                </ul>
-                    </div>​
-            </div>
-            
+            </template>
         </div>
         <div class="show-more-posts">
             <button><b>Show more posts</b></button>
         </div>
-       
+    </main>
+    <main class="main-edit">
+        <form class="edit-form">
+            <input type="file" name="photo" multiple accept="image/*,image/jpeg">
+            <p class=edit-data><b>Author:</b><span class="usser-name"></span>
+            <br><b>Data & Time:</b><span class="time"></span></p>
+            <br><textarea class="tags" placeholder="#hashtags"></textarea>
+            <br><textarea class="description-edit"  placeholder="Short description..."></textarea>
+            <div class=btn-continue><a href="#" class="continue">Continue</a></div>
+        </form>
+    </main>
+    <main class="main-delete">
+        <div class="delete-form">
+            <p class="del-question"><b>Delete post?</b>
+            <hr><button class="del">Cancel</button>
+            <hr class="vertical"><button class="cancel">Delete</button></p>
+        </div>
+    </main>
+    <main class="main-log-form">
+        <div class="log-form"> 
+            <p class=title>Photoblog</p>
+            <div class="login"><p class="log">Login</p>
+                <textarea class="log-in-field"  ></textarea>
+            </div>
+            <div class="password"><p class="pas">Password</p>
+                <textarea class="pas-in-field"  ></textarea>
+            </div>
+            <p class="wrong">*Wrong user or password</p>
+            <div class="sign-in-btn">
+                    <a href="#" class="sign-btn">Sign in</a>
+            </div>
+        </div>
     </main>
     <footer>
         <h2 class = "site-name"> Photoblog</h2>
@@ -373,9 +145,10 @@
             Contact email:
             <a href="garost99@mail.ru">garost99@mail.ru</a>
         </p> 
-    </footer>
-    <script src="script.js"></script>
-    <script src="tests.js"></script>
+    </footer> 
+    <script src="user.js"></script>
     <script src="class.js"></script>
+    <script src="MVC.js"></script>
+    <script src="DOM.js"></script>
 </body>
 </html>
