@@ -17,7 +17,11 @@ public class TimeMeasurementFilter implements Filter {
         long start = System.currentTimeMillis();
         chain.doFilter(request, response);
         long end = System.currentTimeMillis();
-        System.out.println("time - " + (end - start)+"ms");
+
+        HttpServletRequest httpRequest = (HttpServletRequest) request;
+        String path = httpRequest.getRequestURI();
+        String method = httpRequest.getMethod();
+        System.out.println(String.format("%s '%s' - done (%d ms)", method, path, end - start));
     }
 
     @Override
