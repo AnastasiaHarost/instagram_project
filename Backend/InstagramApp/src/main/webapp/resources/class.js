@@ -34,36 +34,26 @@ class PhotoPost {
 }
 
 class PhotoPosts {
-  constructor() {
-    this._posts = [];
-    this.restore();
+
+  async get(id) {
+    const response = await fetch(`/photo-post?id=${id}`, {
+      method: 'GET',
+    }).catch(error => console.log(error));
+    const result = await response.json();
+    return result;
   }
 
-  save() {
-    localStorage.removeItem('posts');
-    const jsonPosts = JSON.stringify(this._posts);
-    localStorage.setItem('posts', jsonPosts);
-  }
-
-  restore() {
-    if (localStorage.length !== 0) {
-      const jsonPosts = localStorage.getItem('posts');
-      const objectsArray = JSON.parse(jsonPosts);
-      objectsArray.forEach((post) => {
-        this._posts.push(new PhotoPost(post.id, post.description, post.create, post.author, post.photoLink, post.likes, post.hashtags));
-      });
+  async add(post) {
+    const postId = await this.get(post.id).id;
+    if (!postId && post._validate()) {
+      const response = await fetch('/photo-post', {
+        method: 'POST',
+        body: JSON.stringify(post),
+      }).catch(error => console.log(error));
+      if (!response.ok) {
+        console.log(response.statusText);
+      }
     }
-  }
-
-  add(post) {
-    const expost = this.get(post.id);
-    if (!expost && post._validate()) {
-      this._posts.unshift(post);
-      this.save();
-      return true;
-    }
-
-    return false;
   }
 
   toggleLike(postid, user) {
@@ -77,16 +67,10 @@ class PhotoPosts {
     return post;
   }
 
-  get(id) {
-    const post = this._posts.find(el => el.id === id);
-    return post || false;
-  }
-
   remove(id) {
     const index = this._posts.findIndex(el => el.id === id);
     if (index !== -1) {
       this._posts.splice(index, 1);
-      this.save();
       return true;
     }
 
@@ -103,7 +87,6 @@ class PhotoPosts {
           .forEach(
             (key) => { expost[key] = edits[key]; },
           );
-        this.save();
         return true;
       }
       return false;
@@ -111,48 +94,16 @@ class PhotoPosts {
     return false;
   }
 
-  /* _isIntersect(posthashtags, confighashtags) {
-    return confighashtags.every(
-      postTag => posthashtags.indexOf(postTag) !== -1,
-    );
-  }
-
-  getPage(skip = 0, top = 10, filterConfig = DEFAULT_FILTER) {
-    if (typeof skip !== 'number' || typeof top !== 'number' || typeof filterConfig !== 'object') {
-      throw new Error('Incorrect filter params!');
+    async getPhotoPosts(skip, top, config) {// TODO
+        const response = await fetch(`/photoposts`, {
+            method: 'GET',
+        }).catch(error => console.log(error));
+        if (!response.ok) {
+            console.log(response.statusText);
+        }
+        const result = await response.json();
+        return result;
     }
-    filterConfig = Object.assign({}, DEFAULT_FILTER, filterConfig || {});
-    const filterPredicate = (a) => {
-      if (filterConfig.dateFrom.getTime() && a.create.getTime() < filterConfig.dateFrom.getTime()) {
-        return false;
-      }
-      if (filterConfig.dateTo.getTime() && a.create.getTime() > filterConfig.dateTo.getTime()) {
-        return false;
-      }
-      if (filterConfig.author && a.author !== filterConfig.author) return false;
-      if (filterConfig.hashtags && !this._isIntersect(a.hashtags, filterConfig.hashtags)) {
-        return false;
-      }
-      return true;
-    };
-    return this._posts.filter(filterPredicate)
-      .sort((a, b) => b.create - a.create).slice(skip, skip + top);
-  }
-*/
-  getPage(skip = 0, top = 10, filterConfig = DEFAULT_FILTER) {
-    if (typeof skip !== 'number' || typeof top !== 'number' || typeof filterConfig !== 'object') {
-      return false;
-    }
-    filterConfig = Object.assign({}, DEFAULT_FILTER, filterConfig || {});
-    let filtered = this._posts
-      .filter(a => (new Date(a.create) >= filterConfig.dateFrom || !filterConfig.dateFrom)
-    && (new Date(a.create) <= filterConfig.dateTo || !filterConfig.dateTo)
-    && (a.author === filterConfig.author || filterConfig.author === '')
-    && (filterConfig.hashtags.length === 0
-    || filterConfig.hashtags.every(el => a.hashtags.includes(el))));
-    filtered = filtered.sort((a, b) => new Date(b.create) - new Date(a.create)).slice(skip, skip + top);
-    return filtered;
-  }
 
   addAll(posts) {
     const notValid = [];
@@ -162,7 +113,6 @@ class PhotoPosts {
         notValid.push(post);
       }
     });
-    this.save();
     return notValid;
   }
 

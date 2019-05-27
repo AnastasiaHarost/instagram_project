@@ -14,7 +14,7 @@ class MVC {
 
     this.onPostAction = this.onPostAction.bind(this);
 
-    this.$phototape = documet.querySelector('.phototape');
+    this.$phototape = document.querySelector('.phototape');
 
     this.$editform = document.querySelector('.edit-form');
 
@@ -216,7 +216,7 @@ class MVC {
           edits.likes = [];
           edits.hashtags = [];
           inputPhoto.oninput = function () {
-            edits.photoLink = `resources/images/${inputPhoto.files[0].name}`;
+            edits.photoLink = `images/${inputPhoto.files[0].name}`;
           };
           inputTags.onchange = function () {
             const tagsArray = inputTags.value.split('#');
@@ -258,7 +258,7 @@ class MVC {
         post.likes = [];
         post.hashtags = [];
         inputPhoto.oninput = function () {
-          post.photoLink = `resources/images/${inputPhoto.files[0].name}`;
+          post.photoLink = `images/${inputPhoto.files[0].name}`;
         };
         inputTags.onchange = function () {
           const tagsArray = inputTags.value.split('#');

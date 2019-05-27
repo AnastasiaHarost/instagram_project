@@ -11,23 +11,23 @@ public class InMemoryPostService implements IPostService {
 
     public InMemoryPostService() {
         posts = new ArrayList<>();
-        ArrayList<String> tags = new ArrayList<>(Arrays.asList("tag1", "tag2"));
+        ArrayList<String> hashtags = new ArrayList<>(Arrays.asList("tag1", "tag2"));
         ArrayList<String> likes = new ArrayList<>(Arrays.asList("like1", "like2"));
-        Post post1 = new Post(1, "desc1", new GregorianCalendar(2014, Calendar.FEBRUARY, 11).getTime(), "author1", "link1",
-                likes, tags);
-        Post post2 = new Post(2, "desc2",new GregorianCalendar(2019, Calendar.FEBRUARY, 11).getTime(), "author2", "link2",
-                likes, tags);
-        Post post3 = new Post(3, "desc3", new GregorianCalendar(2016, Calendar.FEBRUARY, 11).getTime(), "author3", "link3",
-                likes, tags);
+        Post post1 = new Post("1", "desc", new GregorianCalendar(2000, Calendar.FEBRUARY, 12).getTime(), "nastya", "resources/images/1.jpg",
+                likes, hashtags);
+        Post post2 = new Post("2", "desc2",new GregorianCalendar(2003, Calendar.FEBRUARY, 10).getTime(), "liakh", "resources/images/2.jpg",
+                likes, hashtags);
+        Post post3 = new Post("3", "desc3", new GregorianCalendar(2016, Calendar.MAY, 11).getTime(), "sasha", "resources/images/3.jpg",
+                likes, hashtags);
         posts.add(post1);
         posts.add(post2);
         posts.add(post3);
     }
 
     @Override
-    public Post getPost(int id) {
+    public Post getPost(String id) {
         for (int i = 0; i < posts.size(); i++) {
-            if (posts.get(i).getId() == id) {
+            if (posts.get(i).getId().equals(id)) {
                 return posts.get(i);
             }
         }
@@ -47,7 +47,7 @@ public class InMemoryPostService implements IPostService {
                 && (post.getAuthor().equals(filterConfig.getAuthor())) || filterConfig.getAuthor().equals(""))
                 .collect(Collectors
                 .toCollection(ArrayList::new));
-        returnValue.sort((a,b) -> boolToInt(a.getCreatedAt().after(filterConfig.getDateFrom())));//TODO
+        returnValue.sort((a,b) -> boolToInt(a.getCreatedAt().after(filterConfig.getDateFrom())));
         return returnValue;
     }
 
@@ -57,9 +57,9 @@ public class InMemoryPostService implements IPostService {
     }
 
     @Override
-    public boolean deletePost(int id) {
+    public boolean deletePost(String id) {
         for (int i = 0; i < posts.size(); i++) {
-            if (posts.get(i).getId() == id) {
+            if (posts.get(i).getId().equals(id)) {
                 posts.remove(i);
                 return true;
             }
@@ -70,11 +70,21 @@ public class InMemoryPostService implements IPostService {
     @Override
     public boolean editPost(Post newPost) {
         for (int i = 0; i < posts.size(); i++) {
-            if (posts.get(i).getId() == newPost.getId()) {
-                posts.set(i, newPost);
+            if (posts.get(i).getId().equals(newPost.getId())) {
+                posts.get(i).setDescription(newPost.getDescription());
+                posts.get(i).setHashtags(newPost.getHashtags());
+                posts.get(i).setPhotoLink(newPost.getPhotoLink());
+                System.out.println(posts.get(i));
                 return true;
             }
         }
         return false;
+    }
+
+    @Override
+    public String toString() {
+        return "InMemoryPostService{" +
+                "posts=" + posts +
+                '}';
     }
 }
