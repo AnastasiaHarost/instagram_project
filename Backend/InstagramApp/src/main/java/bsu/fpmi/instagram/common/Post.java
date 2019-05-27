@@ -12,6 +12,7 @@ public class Post {
     private ArrayList<String> likes;
     private ArrayList<String> hashtags;
 
+    public Post(){};
     public Post(String id, String description, Date createdAt, String author,
                 String photoLink, ArrayList<String> likes, ArrayList<String> tags) {
         this.id = id;
